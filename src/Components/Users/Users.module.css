@@ -1,0 +1,33 @@
+.Users {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 6.5vh);
+}
+
+.usersArea {
+    background-color: rgba(0, 128, 0, .6);
+    width: 70vw;
+    height: 70vh;
+    border-radius: 35px;
+    overflow: auto;
+}
+
+.User {
+    margin: 30px;
+    background: #0e1d27;
+    border-radius: 30px;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+.userData {
+    color: #f9c300;
+}
+
+.userAvatarImg {
+    border-radius: 100%;
+    width: 90px;
+    height: 90px;
+    padding: 20px;
+}

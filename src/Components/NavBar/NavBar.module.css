@@ -1,0 +1,33 @@
+.NavBar {
+    position: sticky;
+    top: 0;
+    height: 6.5vh;
+    background: #0e1d27;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    opacity: 0.8;
+    transition: 0.3s opacity ease-in-out;
+}
+.NavBar:hover {
+    opacity: 1;
+}
+
+.navItem {
+    text-decoration: none;
+    outline: none;
+    color: green;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Logo {
+    color: #f9c300;
+    font-size: 30px;
+    text-decoration: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

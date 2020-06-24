@@ -1,0 +1,39 @@
+.Profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 6.5vh);
+}
+
+.profileArea {
+    background-color: rgba(0, 128, 0, .6);
+    width: 70vw;
+    height: 70vh;
+    border-radius: 35px;
+    overflow: auto;
+}
+
+.avatar {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.avatarImg {
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+    padding: 30px;
+}
+ .addPost {
+     height: 5vh;
+     display: grid;
+     grid-template-columns: 5fr 1fr;
+     padding-top: 30px;
+     padding-bottom: 30px;
+ }
+.addPost textarea {
+    max-height: 5vh;
+    min-height: 5vh;
+    max-width: 58vw;
+    min-width: 58vw;
+}
