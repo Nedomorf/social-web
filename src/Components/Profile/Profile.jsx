@@ -1,8 +1,22 @@
 import React from 'react';
 import style from './Profile.module.css';
 import avatar from '../../git-profile.jpg';
+import Post from "./Post/Post";
 
-function Profile() {
+
+function Profile(props) {
+
+    let postItem = props.posts.map(post =>  <Post post={post.post}/> ).reverse()
+
+    let changePostText = (e) => {
+        let newPostText = e.target.value;
+        props.changePostText(newPostText);
+    };
+
+    let addPost = () => {
+        props.addPost();
+    };
+
     return (
         <div className={style.Profile}>
             <div className={style.profileArea}>
@@ -16,14 +30,18 @@ function Profile() {
                 </div>
                 <div className={style.posts}>
                     <div className={style.addPost}>
-                        <textarea/>
-                        <button>Отправить</button>
+                        <textarea onChange={changePostText} value={props.newPostText}/>
+                        <button onClick={addPost}>Отправить</button>
                     </div>
-                    <div className={style.postsArea}>posts</div>
+                    <div className={style.postsArea}>
+                        {postItem}
+                    </div>
                 </div>
             </div>
         </div>
     );
+
+
 }
 
 export default Profile;
