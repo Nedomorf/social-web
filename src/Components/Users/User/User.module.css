@@ -1,18 +1,3 @@
-.Users {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: calc(100vh - 6.5vh);
-}
-
-.usersArea {
-    background-color: rgba(0, 128, 0, .6);
-    width: 70vw;
-    height: 70vh;
-    border-radius: 35px;
-    overflow: auto;
-}
-
 .User {
     margin: 30px;
     background: #0e1d27;
@@ -41,15 +26,4 @@
     width: 100px;
     height: 100px;
     margin: 30px;
-}
-
-.userName {
-    outline: none;
-    text-decoration: none;
-    color: #f9c300;
-}
-
-.pages {
-    margin-top: 30px;
-    font-size: 20px;
 }

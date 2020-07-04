@@ -1,5 +1,4 @@
 import Profile from "./Profile";
-import React from "react";
 import {addPost, changePostText} from "../../Redux/profile-reducer";
 import {connect} from "react-redux";
 
