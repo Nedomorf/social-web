@@ -1,12 +1,12 @@
 import React from 'react';
 import style from './Profile.module.css';
-import avatar from '../../git-profile.jpg';
+import avatar from '../../images/git-profile.jpg';
 import Post from "./Post/Post";
 
 
 function Profile(props) {
 
-    let postItem = props.posts.map(post =>  <Post post={post.post}/> ).reverse()
+    let postItem = props.posts.map(post =>  <Post key={post.postId} post={post.post}/> ).reverse()
 
     let changePostText = (e) => {
         let newPostText = e.target.value;

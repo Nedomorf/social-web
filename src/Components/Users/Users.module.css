@@ -51,5 +51,28 @@
 
 .pages {
     margin-top: 30px;
+}
+
+.currentPage {
     font-size: 20px;
+    font-weight: bolder;
+}
+
+.page {
+    margin: 5px;
+    cursor: pointer;
+}
+.page:hover {
+    color: #f9c300;
+}
+
+.navs {
+    margin: 5px;
+    cursor: pointer;
+    color: black;
+    font-weight: bolder;
+    font-size: 25px;
+}
+.navs:hover {
+    color: #f9c300;
 }

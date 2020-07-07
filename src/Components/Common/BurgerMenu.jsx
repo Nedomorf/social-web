@@ -6,7 +6,7 @@ import './BurgerMenu.css';
 export default props => {
     return (
         // Pass on our props
-        <Menu {...props}>
+        <Menu {...props} left>
             <NavLink className="menu-item" to="/">
                 Home
             </NavLink>

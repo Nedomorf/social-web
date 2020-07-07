@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   /*background-image: url("./bg.jpg");*/
-  background-image: url("./Ann.jpg");
+  background-image: url("images/Ann.jpg");
   height: 100vh;
   background-attachment: fixed;
   background-position: center;
