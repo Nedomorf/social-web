@@ -1,6 +1,15 @@
 import Users from "./Users";
 import {connect} from "react-redux";
-import {followUser, setPage, setShortPages, setTotalCount, setUsers, unfollowUser, switchLeftPage, switchRightPage} from "../../Redux/users-reducer";
+import {
+    followUser,
+    setPage,
+    setShortPages,
+    setTotalCount,
+    setUsers,
+    unfollowUser,
+    switchLeftPage,
+    switchRightPage, toggleIsFetching
+} from "../../Redux/users-reducer";
 
 let mapStateToProps = (state) => {
     return {
@@ -10,10 +19,21 @@ let mapStateToProps = (state) => {
         page: state.Users.page,
         shortPages: state.Users.shortPages,
         toLeftPage: state.Users.toLeftPage,
-        toRightPage: state.Users.toRightPage
+        toRightPage: state.Users.toRightPage,
+        isFetching: state.Users.isFetching
     }
 }
 
-let mapDispatchToProps = {followUser, unfollowUser, setUsers, setPage, setTotalCount, setShortPages, switchLeftPage, switchRightPage}
+let mapDispatchToProps = {
+    followUser,
+    unfollowUser,
+    setUsers,
+    setPage,
+    setTotalCount,
+    setShortPages,
+    switchLeftPage,
+    switchRightPage,
+    toggleIsFetching
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users);

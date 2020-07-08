@@ -6,6 +6,7 @@ const SET_TOTAL_COUNT = 'SET-TOTAL-COUNT';
 const SET_SHORT_PAGES = 'SET-SHORT-PAGES';
 const SWITCH_LEFT_PAGE = 'SWITCH-LEFT-PAGE';
 const SWITCH_RIGHT_PAGE = 'SWITCH-RIGHT-PAGE';
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 
 let initialState = {
     users: [],
@@ -14,7 +15,8 @@ let initialState = {
     page: 1,
     shortPages: [1, 2, 3, 4, 5, '...'],
     toLeftPage: false,
-    toRightPage: true
+    toRightPage: true,
+    isFetching: false
 };
 
 let usersReducer = (state = initialState, action) => {
@@ -79,6 +81,12 @@ let usersReducer = (state = initialState, action) => {
                 toRightPage: action.switchRightPage
             }
 
+        case TOGGLE_IS_FETCHING:
+            return  {
+                ...state,
+                isFetching: action.isFetching
+            }
+
         default:
             return state;
 
@@ -123,6 +131,11 @@ export const switchLeftPage = (switchLeftPage) => ({
 export const switchRightPage = (switchRightPage) => ({
     type: SWITCH_RIGHT_PAGE,
     switchRightPage
+})
+
+export const toggleIsFetching = (isFetching) => ({
+    type: TOGGLE_IS_FETCHING,
+    isFetching
 })
 
 export default usersReducer;

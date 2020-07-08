@@ -3,15 +3,19 @@ import style from './Users.module.css';
 // import User from "./User/User";
 import * as axios from "axios";
 import {NavLink} from "react-router-dom";
+import Preloader from "../Common/Preloader";
 
 class Users extends React.Component {
 
     componentDidMount() {
 
+        this.props.toggleIsFetching(true)
+
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.count}`)
             .then(res => {
                 this.props.setUsers(res.data.items);
                 this.props.setTotalCount(res.data.totalCount);
+                this.props.toggleIsFetching(false)
             })
     };
 
@@ -60,9 +64,11 @@ class Users extends React.Component {
         } else {
             this.props.switchRightPage(true)
         }
+        this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.count}`)
             .then(res => {
                 this.props.setUsers(res.data.items);
+                this.props.toggleIsFetching(false)
             })
 
         // let pages = [pagesCount-4, pagesCount-3, pagesCount-2, pagesCount-1, pagesCount]
@@ -90,15 +96,19 @@ class Users extends React.Component {
             ? this.props.switchRightPage(false)
             : this.props.switchRightPage(true)
 
+        this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.count}`)
             .then(res => {
                 this.props.setUsers(res.data.items);
+                this.props.toggleIsFetching(false)
             })
 
         if (shortPages.includes(page) === false) {
+            this.props.toggleIsFetching(true)
             for (let i = 0; i < 5; i++) {
                 shortPages[i] = shortPages[i] + num;
             }
+            this.props.toggleIsFetching(false)
             this.props.setShortPages(shortPages);
         }
 
@@ -180,12 +190,13 @@ class Users extends React.Component {
         return (
             <div className={style.Users}>
                 <div className={style.usersArea}>
-                    <div className={style.pages}>
 
-                        {
-                            pages.length > 10
-                                ?
-                                <span>
+                    {this.props.isFetching ? <Preloader/> :
+                        <div className={style.pages}>
+                            {
+                                pages.length > 10
+                                    ?
+                                    <span>
 
                                     {
                                         this.props.toLeftPage
@@ -201,12 +212,12 @@ class Users extends React.Component {
                                             </span>
                                             : null
                                     }
-                                    <span>
-                                        {this.props.shortPages.map(page => <Page page={page}/>)}
+                                        <span>
+                                        {this.props.shortPages.map(page => <Page page={page} key={page}/>)}
                                     </span>
-                                    {
-                                        this.props.toRightPage
-                                            ? <span>
+                                        {
+                                            this.props.toRightPage
+                                                ? <span>
                                                 <span className={style.navs} onClick={() => {
                                                     num = 1;
                                                     this.changePage(shortPages, num, pagesCount)
@@ -216,20 +227,22 @@ class Users extends React.Component {
                                                     this.changePage(shortPages, num, pagesCount)
                                                 }}>⫸</span>
                                             </span>
-                                            : null
-                                    }
+                                                : null
+                                        }
 
                                 </span>
 
-                                : pages.map(page => <Page page={page}/>)
+                                    : pages.map(page => <Page page={page}/>)
 
-                        }
+                            }
 
-                        {/*{*/}
-                        {/*    pages.map(page => <Page page={page} /> )*/}
-                        {/*}*/}
+                            {/*{*/}
+                            {/*    pages.map(page => <Page page={page} /> )*/}
+                            {/*}*/}
 
-                    </div>
+                        </div>
+                    }
+
                     {
                         this.props.users.map(user =>
 

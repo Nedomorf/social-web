@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST';
 const CHANGE_POST_TEXT = 'CHANGE-POST-TEXT';
+const SET_PROFILE = 'SET-PROFILE';
 
 let id = 0;
 
@@ -14,6 +15,7 @@ let initialState = {
         {postId: `${++id}`, post: "loool"},
     ],
     newPostText: "New post...",
+    profile: null
 };
 
 let profileReducer = (state = initialState, action) => {
@@ -35,6 +37,11 @@ let profileReducer = (state = initialState, action) => {
                 ...state,
                 newPostText: action.newPostText
             };
+        case SET_PROFILE:
+            return {
+                ...state,
+                profile: action.profile
+            }
         default:
             return state;
 
@@ -49,6 +56,11 @@ export const addPost = () => ({
 export const changePostText = (newPostText) => ({
     type: CHANGE_POST_TEXT,
     newPostText
+})
+
+export const setProfile = (profile) => ({
+    type: SET_PROFILE,
+    profile
 })
 
 export default profileReducer;
