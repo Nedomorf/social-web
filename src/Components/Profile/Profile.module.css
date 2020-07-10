@@ -29,7 +29,7 @@
     width: 200px;
     height: 200px;
     margin: 30px;
-    border-color: #0e1d27;
+    /*border-color: #0e1d27;*/
     border-style: solid;
 }
  .addPost {
@@ -44,4 +44,9 @@
     min-height: 5vh;
     max-width: 58vw;
     min-width: 58vw;
+}
+
+.posts {
+    position: relative;
+    top: -35vh;
 }

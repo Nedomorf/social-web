@@ -11,9 +11,9 @@ function App(props) {
     <div className="App">
       <NavBar/>
         <Switch>
-          <Route path="/profile" render={ () => <ProfileContainer store={props.store}/> }/>
-          <Route path="/messages" render={ () => <Messages/> }/>
-          <Route path="/users" render={ () => <UsersContainer store={props.store}/> }/>
+          <Route path='/profile/:userId?' render={ () => <ProfileContainer /> }/>
+          <Route path='/messages' render={ () => <Messages/> }/>
+          <Route path='/users' render={ () => <UsersContainer /> }/>
       </Switch>
     </div>
   );

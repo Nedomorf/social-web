@@ -3,15 +3,22 @@ import {addPost, changePostText, setProfile} from "../../Redux/profile-reducer";
 import {connect} from "react-redux";
 import React from "react";
 import * as axios from "axios";
+import {withRouter} from "react-router-dom";
 
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
 
+        debugger
+
+        let userId = this.props.match.params.userId;
+
+        if (!userId) userId = 6441
+
         // this.props.toggleIsFetching(true)
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/10`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(res => {
                 this.props.setProfile(res.data);
                 // this.props.setTotalCount(res.data.totalCount);
@@ -19,6 +26,7 @@ class ProfileContainer extends React.Component {
             })
 
     };
+
 
     changePostText = (e) => {
         let newPostText = e.target.value;
@@ -51,4 +59,6 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = {addPost, changePostText, setProfile}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
+let WithURLDataContainerComponent = withRouter(ProfileContainer);
+
+export default connect(mapStateToProps, mapDispatchToProps)(WithURLDataContainerComponent);
