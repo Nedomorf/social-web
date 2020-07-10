@@ -1,10 +1,10 @@
 import preloader from "../../images/preloader.svg";
 import React from "react";
 
-function Preloader() {
+function Preloader(props) {
     return (
         <>
-            <img src={preloader} alt="preloader"/>
+            <img src={preloader} alt="preloader" style={props.style}/>
         </>
     )
 }

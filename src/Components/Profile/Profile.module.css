@@ -16,13 +16,21 @@
 .avatar {
     display: grid;
     grid-template-columns: 1fr 4fr;
+    /*transform: scale(0.9);*/
+    /*box-shadow: 0px 0px 20px 25px;*/
+    /*border-radius: 35px;*/
+}
+.avatar h1 {
+    /*color: #f9c300;*/
 }
 
 .avatarImg {
     border-radius: 100%;
     width: 200px;
     height: 200px;
-    padding: 30px;
+    margin: 30px;
+    border-color: #0e1d27;
+    border-style: solid;
 }
  .addPost {
      height: 5vh;
@@ -37,4 +45,3 @@
     max-width: 58vw;
     min-width: 58vw;
 }
-

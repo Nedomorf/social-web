@@ -249,7 +249,7 @@ class Users extends React.Component {
                             <div className={style.User} key={user.id}>
                                 <div className={style.userAvatar}>
 
-                                    <NavLink to={`/users/${user.id}`}>
+                                    <NavLink to={`/profile/${user.id}`}>
 
                                         {
                                             user.photos.small === null
@@ -265,7 +265,7 @@ class Users extends React.Component {
                                 </div>
                                 <div className={style.userData}>
                                     <div>
-                                        <NavLink to={`/users/${user.id}`} className={style.userName}>
+                                        <NavLink to={`/profile/${user.id}`} className={style.userName}>
                                             <h2>{user.name}</h2></NavLink>
                                         <div className={style.userDescription}>{user.status}</div>
                                     </div>

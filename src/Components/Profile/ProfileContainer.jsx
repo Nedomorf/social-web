@@ -4,18 +4,20 @@ import {connect} from "react-redux";
 import React from "react";
 import * as axios from "axios";
 
+
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
 
         // this.props.toggleIsFetching(true)
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/10`)
             .then(res => {
                 this.props.setProfile(res.data);
                 // this.props.setTotalCount(res.data.totalCount);
                 // this.props.toggleIsFetching(false)
             })
+
     };
 
     changePostText = (e) => {
@@ -27,14 +29,15 @@ class ProfileContainer extends React.Component {
         this.props.addPost();
     };
 
-     render() {
-         return (
+    render() {
 
-             <Profile addPost={this.addPost} changePostText={this.changePostText} posts={this.props.posts}
-                      newPostText={this.props.newPostText} profile={this.props.profile}/>
+        return (
 
-         )
-     }
+            <Profile addPost={this.addPost} changePostText={this.changePostText} posts={this.props.posts}
+                     newPostText={this.props.newPostText} profile={this.props.profile}/>
+
+        )
+    }
 
 }
 
