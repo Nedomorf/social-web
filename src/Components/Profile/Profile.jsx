@@ -47,18 +47,23 @@ function Profile(props) {
                         <div>
                             <div style={{backgroundColor, height: `35vh`, position: `relative`, filter: `blur(20px)`}}>
                             </div>
-                            <div className={style.avatar} style={{ position: `relative`, top: `-35vh` }}>
-                                <img src={IMAGE} alt="profile-ava" className={style.avatarImg} style={{ borderColor: color }}/>
+                            <div className={style.avatar} style={{position: `relative`, top: `-35vh`}}>
+                                {
+                                    props.profile.photos.large === null
+                                        ? <img src="https://zurlz.xyz/img/userb.png" alt="profile-ava"
+                                               className={style.avatarImg} style={{borderColor: color}}/>
+                                        : <img src={props.profile.photos.large} alt="profile-ava"
+                                               className={style.avatarImg} style={{borderColor: color, borderStyle: `solid`}}/>
+                                }
                                 <div style={{color}}><h1>{props.profile.fullName}</h1></div>
                             </div>
-                            <div className={style.description} style={{ position: `relative`, top: `-45vh`, color }}>
+                            <div className={style.description} style={{position: `relative`, top: `-45vh`, color}}>
                                 <h3>{props.profile.aboutMe}</h3>
                             </div>
                         </div>
                     )}
 
                 </ImagePalette>
-
 
 
                 <div className={style.posts}>
