@@ -25,6 +25,8 @@
     color: #f9c300;
     display: grid;
     grid-template-columns: 5fr 1fr;
+    align-items: center;
+    justify-content: center;
 }
 
 .userAvatarImg {
@@ -33,7 +35,7 @@
     margin: 30px;
 }
 
-.isFollowedButton button {
+.followingButton button {
     background: #f9c300;
     color: #0e1d27;
     border-radius: 30px;
@@ -76,4 +78,8 @@
 
 .navs:hover {
     color: #f9c300;
+}
+
+.preloader {
+    margin: 50px;
 }

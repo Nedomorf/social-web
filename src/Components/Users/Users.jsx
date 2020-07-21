@@ -1,9 +1,9 @@
 import React from 'react';
 import style from './Users.module.css';
 // import User from "./User/User";
-import * as axios from "axios";
 import {NavLink} from "react-router-dom";
 import Preloader from "../Common/Preloader";
+import {usersAPI} from "../../api/api";
 
 class Users extends React.Component {
 
@@ -11,12 +11,10 @@ class Users extends React.Component {
 
         this.props.toggleIsFetching(true)
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.count}`, {
-            withCredentials: true
-        })
-            .then(res => {
-                this.props.setUsers(res.data.items);
-                this.props.setTotalCount(res.data.totalCount);
+        usersAPI.getUsers(this.props.page, this.props.count)
+            .then(data => {
+                this.props.setUsers(data.items);
+                this.props.setTotalCount(data.totalCount);
                 this.props.toggleIsFetching(false)
             })
     };
@@ -67,11 +65,9 @@ class Users extends React.Component {
             this.props.switchRightPage(true)
         }
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.count}`, {
-            withCredentials: true
-        })
-            .then(res => {
-                this.props.setUsers(res.data.items);
+        usersAPI.getUsers(page, this.props.count)
+            .then(data => {
+                this.props.setUsers(data.items);
                 this.props.toggleIsFetching(false)
             })
 
@@ -101,12 +97,9 @@ class Users extends React.Component {
             : this.props.switchRightPage(true)
 
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.count}`,
-            {
-                withCredentials: true
-            })
-            .then(res => {
-                this.props.setUsers(res.data.items);
+        usersAPI.getUsers(page, this.props.count)
+            .then(data => {
+                this.props.setUsers(data.items);
                 this.props.toggleIsFetching(false)
             })
 
@@ -276,41 +269,45 @@ class Users extends React.Component {
                                             <h2>{user.name}</h2></NavLink>
                                         <div className={style.userDescription}>{user.status}</div>
                                     </div>
-                                    <div className={style.isFollowedButton}>
+                                    <div className={style.followingButton}>
                                         {
                                             user.followed
-                                                ? <button onClick={
-                                                    () => {
-                                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
-                                                            withCredentials: true,
-                                                            headers: {
-                                                                "API-KEY": "6183f663-1903-42f5-a144-b44d307cb69e"
-                                                            }
-                                                        })
-                                                            .then(res => {
-                                                                if (res.data.resultCode === 0) {
-                                                                    this.props.unfollowUser(user.id)
-                                                                }
-                                                            })
-                                                    }
-                                                }>Unfollow</button>
+                                                ?
+                                                this.props.followingInProcess.some(id => id === user.id)
+                                                    ? <div className={style.preloader}><Preloader/></div>
+                                                    :
+                                                    <button disabled={this.props.followingInProcess.some(id => id === user.id)} onClick={
+                                                        () => {
+                                                            this.props.toggleFollowingProcess(true, user.id)
+                                                            usersAPI.unFollowUser(user.id)
+                                                                .then(data => {
+                                                                    if (data.resultCode === 0) {
+                                                                        this.props.unfollowUser(user.id)
+                                                                    }
+                                                                    this.props.toggleFollowingProcess(false, user.id)
+                                                                })
+                                                        }
+                                                    }>Unfollow</button>
 
-                                                : <button onClick={
-                                                    () => {
-                                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
-                                                            withCredentials: true,
-                                                            headers: {
-                                                                "API-KEY": "6183f663-1903-42f5-a144-b44d307cb69e"
-                                                            }
-                                                        })
-                                                            .then(res => {
-                                                                if (res.data.resultCode === 0) {
-                                                                    this.props.followUser(user.id)
-                                                                }
-                                                            })
-                                                    }
-                                                }>Follow</button>
+
+                                                :
+                                                this.props.followingInProcess.some(id => id === user.id)
+                                                    ? <div className={style.preloader}><Preloader/></div>
+                                                    :
+                                                    <button disabled={this.props.followingInProcess.some(id => id === user.id)} onClick={
+                                                        () => {
+                                                            this.props.toggleFollowingProcess(true, user.id)
+                                                            usersAPI.followUser(user.id)
+                                                                .then(data => {
+                                                                    if (data.resultCode === 0) {
+                                                                        this.props.followUser(user.id)
+                                                                    }
+                                                                    this.props.toggleFollowingProcess(false, user.id)
+                                                                })
+                                                        }
+                                                    }>Follow</button>
                                         }
+
                                     </div>
                                 </div>
                             </div>

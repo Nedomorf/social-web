@@ -7,16 +7,21 @@ const SET_SHORT_PAGES = 'SET-SHORT-PAGES';
 const SWITCH_LEFT_PAGE = 'SWITCH-LEFT-PAGE';
 const SWITCH_RIGHT_PAGE = 'SWITCH-RIGHT-PAGE';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const TOGGLE_FOLLOWING_PROCESS = 'TOGGLE-FOLLOWING-PROCESS';
+// const ADD_FRIEND = 'ADD-FRIEND';
+// const REMOVE_FRIEND = 'REMOVE-FRIEND';
 
 let initialState = {
     users: [],
+    friends: [],
     count: 10,
     totalCount: 1,
     page: 1,
     shortPages: [1, 2, 3, 4, 5, '...'],
     toLeftPage: false,
     toRightPage: true,
-    isFetching: false
+    isFetching: false,
+    followingInProcess: []
 };
 
 let usersReducer = (state = initialState, action) => {
@@ -26,6 +31,7 @@ let usersReducer = (state = initialState, action) => {
         case FOLLOW_USER:
             return {
                 ...state,
+                friends: [...state.friends, action.id],
                 users: state.users.map(user => {
                     if (user.id === action.id) {
                         return {...user, followed: true}
@@ -37,6 +43,7 @@ let usersReducer = (state = initialState, action) => {
         case UNFOLLOW_USER:
             return {
                 ...state,
+                friends: state.friends.filter(id => id !== action.id),
                 users: state.users.map(user => {
                     if (user.id === action.id) {
                         return {...user, followed: false}
@@ -86,6 +93,26 @@ let usersReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.isFetching
             }
+
+        case TOGGLE_FOLLOWING_PROCESS:
+            return  {
+                ...state,
+                followingInProcess: action.isFetching
+                    ? [...state.followingInProcess, action.id]
+                    : state.followingInProcess.filter(id => id !== action.id)
+            }
+
+        // case ADD_FRIEND:
+        //     return {
+        //         ...state,
+        //         friends: [...state.friends, action.id]
+        //     }
+        //
+        // case REMOVE_FRIEND:
+        //     return {
+        //         ...state,
+        //         friends: state.friends.filter(id => id !== action.id)
+        //     }
 
         default:
             return state;
@@ -137,5 +164,22 @@ export const toggleIsFetching = (isFetching) => ({
     type: TOGGLE_IS_FETCHING,
     isFetching
 })
+
+export const toggleFollowingProcess = (isFetching, id) => ({
+    type: TOGGLE_FOLLOWING_PROCESS,
+    isFetching,
+    id
+})
+
+// export const addFriend = (id) => ({
+//     type: ADD_FRIEND,
+//     id
+// })
+//
+// export const removeFriend = (id) => ({
+//     type: REMOVE_FRIEND,
+//     id
+// })
+
 
 export default usersReducer;

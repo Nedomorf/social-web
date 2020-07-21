@@ -8,7 +8,7 @@ import {
     setUsers,
     unfollowUser,
     switchLeftPage,
-    switchRightPage, toggleIsFetching
+    switchRightPage, toggleIsFetching, toggleFollowingProcess
 } from "../../Redux/users-reducer";
 
 let mapStateToProps = (state) => {
@@ -20,7 +20,8 @@ let mapStateToProps = (state) => {
         shortPages: state.Users.shortPages,
         toLeftPage: state.Users.toLeftPage,
         toRightPage: state.Users.toRightPage,
-        isFetching: state.Users.isFetching
+        isFetching: state.Users.isFetching,
+        followingInProcess: state.Users.followingInProcess
     }
 }
 
@@ -33,7 +34,8 @@ let mapDispatchToProps = {
     setShortPages,
     switchLeftPage,
     switchRightPage,
-    toggleIsFetching
+    toggleIsFetching,
+    toggleFollowingProcess
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users);

@@ -2,8 +2,8 @@ import Profile from "./Profile";
 import {addPost, changePostText, setProfile, toggleIsFetching} from "../../Redux/profile-reducer";
 import {connect} from "react-redux";
 import React from "react";
-import * as axios from "axios";
 import {withRouter} from "react-router-dom";
+import {userProfileAPI} from "../../api/api";
 
 
 class ProfileContainer extends React.Component {
@@ -16,9 +16,9 @@ class ProfileContainer extends React.Component {
 
         // this.props.toggleIsFetching(true)
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(res => {
-                this.props.setProfile(res.data);
+        userProfileAPI.getUserProfile(userId)
+            .then(data => {
+                this.props.setProfile(data);
                 // this.props.setTotalCount(res.data.totalCount);
                 // this.props.toggleIsFetching(false)
             })
