@@ -1,5 +1,5 @@
 import Profile from "./Profile";
-import {addPost, changePostText, setProfile} from "../../Redux/profile-reducer";
+import {addPost, changePostText, setProfile, toggleIsFetching} from "../../Redux/profile-reducer";
 import {connect} from "react-redux";
 import React from "react";
 import * as axios from "axios";
@@ -9,8 +9,6 @@ import {withRouter} from "react-router-dom";
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-
-        debugger
 
         let userId = this.props.match.params.userId;
 
@@ -53,11 +51,12 @@ let mapStateToProps = (state) => {
     return {
         posts: state.Profile.posts,
         newPostText: state.Profile.newPostText,
-        profile: state.Profile.profile
+        profile: state.Profile.profile,
+        isFetching: state.Profile.isFetching
     }
 }
 
-let mapDispatchToProps = {addPost, changePostText, setProfile}
+let mapDispatchToProps = {addPost, changePostText, setProfile, toggleIsFetching}
 
 let WithURLDataContainerComponent = withRouter(ProfileContainer);
 

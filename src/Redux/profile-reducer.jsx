@@ -1,6 +1,7 @@
 const ADD_POST = 'ADD-POST';
 const CHANGE_POST_TEXT = 'CHANGE-POST-TEXT';
 const SET_PROFILE = 'SET-PROFILE';
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 
 let id = 0;
 
@@ -15,7 +16,8 @@ let initialState = {
         {postId: `${++id}`, post: "loool"},
     ],
     newPostText: "New post...",
-    profile: null
+    profile: null,
+    isFetching: false
 };
 
 let profileReducer = (state = initialState, action) => {
@@ -42,6 +44,11 @@ let profileReducer = (state = initialState, action) => {
                 ...state,
                 profile: action.profile
             }
+        case TOGGLE_IS_FETCHING:
+            return  {
+                ...state,
+                isFetching: action.isFetching
+            }
         default:
             return state;
 
@@ -61,6 +68,11 @@ export const changePostText = (newPostText) => ({
 export const setProfile = (profile) => ({
     type: SET_PROFILE,
     profile
+})
+
+export const toggleIsFetching = (isFetching) => ({
+    type: TOGGLE_IS_FETCHING,
+    isFetching
 })
 
 export default profileReducer;

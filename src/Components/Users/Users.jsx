@@ -11,7 +11,9 @@ class Users extends React.Component {
 
         this.props.toggleIsFetching(true)
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.count}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.count}`, {
+            withCredentials: true
+        })
             .then(res => {
                 this.props.setUsers(res.data.items);
                 this.props.setTotalCount(res.data.totalCount);
@@ -65,7 +67,9 @@ class Users extends React.Component {
             this.props.switchRightPage(true)
         }
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.count}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.count}`, {
+            withCredentials: true
+        })
             .then(res => {
                 this.props.setUsers(res.data.items);
                 this.props.toggleIsFetching(false)
@@ -97,13 +101,16 @@ class Users extends React.Component {
             : this.props.switchRightPage(true)
 
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.count}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.count}`,
+            {
+                withCredentials: true
+            })
             .then(res => {
                 this.props.setUsers(res.data.items);
                 this.props.toggleIsFetching(false)
             })
 
-        if (shortPages.includes(page) === false) {
+        if (!shortPages.includes(page)) {
             this.props.toggleIsFetching(true)
             for (let i = 0; i < 5; i++) {
                 shortPages[i] = shortPages[i] + num;
@@ -250,15 +257,15 @@ class Users extends React.Component {
                                 <div className={style.userAvatar}>
 
                                     <NavLink to={`/profile/${user.id}`}>
-
                                         {
                                             user.photos.small === null
-                                                ? <img src="https://zurlz.xyz/img/userb.png" alt="user-avatar"
-                                                       className={style.userAvatarImg}/>
+                                                ? <img
+                                                    src="http://pluspng.com/img-png/user-png-icon-young-user-icon-2400.png"
+                                                    alt="user-avatar"
+                                                    className={style.userAvatarImg}/>
                                                 : <img src={user.photos.small} alt="user-avatar"
-                                                       className={style.userAvatarImg}/>
+                                                       className={style.userAvatarImg} style={{borderRadius: `100%`}}/>
                                         }
-
                                     </NavLink>
 
                                     {/*<img src={user.photos.small} alt="user-avatar" className={style.userAvatarImg}/>*/}
@@ -274,13 +281,33 @@ class Users extends React.Component {
                                             user.followed
                                                 ? <button onClick={
                                                     () => {
-                                                        this.props.unfollowUser(user.id)
+                                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
+                                                            withCredentials: true,
+                                                            headers: {
+                                                                "API-KEY": "6183f663-1903-42f5-a144-b44d307cb69e"
+                                                            }
+                                                        })
+                                                            .then(res => {
+                                                                if (res.data.resultCode === 0) {
+                                                                    this.props.unfollowUser(user.id)
+                                                                }
+                                                            })
                                                     }
                                                 }>Unfollow</button>
 
                                                 : <button onClick={
                                                     () => {
-                                                        this.props.followUser(user.id)
+                                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
+                                                            withCredentials: true,
+                                                            headers: {
+                                                                "API-KEY": "6183f663-1903-42f5-a144-b44d307cb69e"
+                                                            }
+                                                        })
+                                                            .then(res => {
+                                                                if (res.data.resultCode === 0) {
+                                                                    this.props.followUser(user.id)
+                                                                }
+                                                            })
                                                     }
                                                 }>Follow</button>
                                         }
