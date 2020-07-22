@@ -3,20 +3,13 @@ import style from './Users.module.css';
 // import User from "./User/User";
 import {NavLink} from "react-router-dom";
 import Preloader from "../Common/Preloader";
-import {usersAPI} from "../../api/api";
 
 class Users extends React.Component {
 
     componentDidMount() {
 
-        this.props.toggleIsFetching(true)
+        this.props.getUsers(this.props.page, this.props.count);
 
-        usersAPI.getUsers(this.props.page, this.props.count)
-            .then(data => {
-                this.props.setUsers(data.items);
-                this.props.setTotalCount(data.totalCount);
-                this.props.toggleIsFetching(false)
-            })
     };
 
 
@@ -64,12 +57,14 @@ class Users extends React.Component {
         } else {
             this.props.switchRightPage(true)
         }
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(page, this.props.count)
-            .then(data => {
-                this.props.setUsers(data.items);
-                this.props.toggleIsFetching(false)
-            })
+
+        this.props.getUsers(page, this.props.count);
+        // this.props.toggleIsFetching(true)
+        // usersAPI.getUsers(page, this.props.count)
+        //     .then(data => {
+        //         this.props.setUsers(data.items);
+        //         this.props.toggleIsFetching(false)
+        //     })
 
         // let pages = [pagesCount-4, pagesCount-3, pagesCount-2, pagesCount-1, pagesCount]
         // console.log(pages)
@@ -96,12 +91,13 @@ class Users extends React.Component {
             ? this.props.switchRightPage(false)
             : this.props.switchRightPage(true)
 
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(page, this.props.count)
-            .then(data => {
-                this.props.setUsers(data.items);
-                this.props.toggleIsFetching(false)
-            })
+        this.props.getUsers(page, this.props.count)
+        // this.props.toggleIsFetching(true)
+        // usersAPI.getUsers(page, this.props.count)
+        //     .then(data => {
+        //         this.props.setUsers(data.items);
+        //         this.props.toggleIsFetching(false)
+        //     })
 
         if (!shortPages.includes(page)) {
             this.props.toggleIsFetching(true)
@@ -278,14 +274,7 @@ class Users extends React.Component {
                                                     :
                                                     <button disabled={this.props.followingInProcess.some(id => id === user.id)} onClick={
                                                         () => {
-                                                            this.props.toggleFollowingProcess(true, user.id)
-                                                            usersAPI.unFollowUser(user.id)
-                                                                .then(data => {
-                                                                    if (data.resultCode === 0) {
-                                                                        this.props.unfollowUser(user.id)
-                                                                    }
-                                                                    this.props.toggleFollowingProcess(false, user.id)
-                                                                })
+                                                            this.props.unfollow(user.id)
                                                         }
                                                     }>Unfollow</button>
 
@@ -296,14 +285,7 @@ class Users extends React.Component {
                                                     :
                                                     <button disabled={this.props.followingInProcess.some(id => id === user.id)} onClick={
                                                         () => {
-                                                            this.props.toggleFollowingProcess(true, user.id)
-                                                            usersAPI.followUser(user.id)
-                                                                .then(data => {
-                                                                    if (data.resultCode === 0) {
-                                                                        this.props.followUser(user.id)
-                                                                    }
-                                                                    this.props.toggleFollowingProcess(false, user.id)
-                                                                })
+                                                            this.props.follow(user.id);
                                                         }
                                                     }>Follow</button>
                                         }
