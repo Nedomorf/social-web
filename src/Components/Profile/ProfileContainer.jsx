@@ -3,6 +3,8 @@ import {addPost, changePostText, getProfile} from "../../Redux/profile-reducer";
 import {connect} from "react-redux";
 import React from "react";
 import {withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 class ProfileContainer extends React.Component {
@@ -28,7 +30,6 @@ class ProfileContainer extends React.Component {
     };
 
     render() {
-
         return (
 
             <Profile addPost={this.addPost} changePostText={this.changePostText} {...this.props}/>
@@ -43,12 +44,22 @@ let mapStateToProps = (state) => {
         posts: state.Profile.posts,
         newPostText: state.Profile.newPostText,
         profile: state.Profile.profile,
-        isFetching: state.Profile.isFetching
+        isFetching: state.Profile.isFetching,
     }
 }
 
 let mapDispatchToProps = {addPost, changePostText, getProfile}
 
-let WithURLDataContainerComponent = withRouter(ProfileContainer);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
 
-export default connect(mapStateToProps, mapDispatchToProps)(WithURLDataContainerComponent);
+// let authRedirectContainer = withAuthRedirect(ProfileContainer);
+//
+// let WithURLDataContainerComponent = withRouter(authRedirectContainer);
+//
+//
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(WithURLDataContainerComponent);

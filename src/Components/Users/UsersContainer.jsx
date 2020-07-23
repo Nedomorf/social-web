@@ -6,6 +6,9 @@ import {
     switchLeftPage,
     switchRightPage, getUsers, follow, unfollow
 } from "../../Redux/users-reducer";
+import React from "react";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 let mapStateToProps = (state) => {
     return {
@@ -17,7 +20,7 @@ let mapStateToProps = (state) => {
         toLeftPage: state.Users.toLeftPage,
         toRightPage: state.Users.toRightPage,
         isFetching: state.Users.isFetching,
-        followingInProcess: state.Users.followingInProcess
+        followingInProcess: state.Users.followingInProcess,
     }
 }
 
@@ -31,4 +34,11 @@ let mapDispatchToProps = {
     unfollow
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Users)
+
+// let authRedirectComponent = withAuthRedirect(Users);
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(authRedirectComponent);

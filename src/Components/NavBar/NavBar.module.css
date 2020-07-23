@@ -8,11 +8,13 @@
     opacity: 0.8;
     transition: 0.3s opacity ease-in-out;
 }
+
 .navs {
     display: grid;
     /*grid-template-columns: repeat(4, 1fr);*/
     padding-left: 20vw;
 }
+
 .NavBar:hover {
     opacity: 1;
 }
@@ -55,7 +57,8 @@
     overflow: hidden;
     padding-left: 1vw;
 }
-.userStateWrapper:before{
+
+.userStateWrapper:before {
     content: '';
     position: absolute;
     top: 0;
@@ -64,17 +67,21 @@
     height: 100%;
     transition: left .4s;
 }
-.logout:before{
+
+.logout:before {
     background: linear-gradient(to right, red 0%, red 50%, rgb(14, 29, 39) 50%, rgb(14, 29, 39) 100%);
 }
-.login:before{
+
+.login:before {
     background: linear-gradient(to right, green 0%, green 50%, rgb(14, 29, 39) 50%, rgb(14, 29, 39) 100%);
 
 }
-.userStateWrapper:hover:before{
+
+.userStateWrapper:hover:before {
     left: 0;
 }
-.userState{
+
+.userState {
     position: relative;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -95,6 +102,7 @@
     justify-content: center;
     transition: .2s linear;
 }
+
 .navs:hover + .pushLogin {
     top: 92vh;
 }
