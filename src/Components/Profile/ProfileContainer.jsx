@@ -1,9 +1,8 @@
 import Profile from "./Profile";
-import {addPost, changePostText, setProfile, toggleIsFetching} from "../../Redux/profile-reducer";
+import {addPost, changePostText, getProfile} from "../../Redux/profile-reducer";
 import {connect} from "react-redux";
 import React from "react";
 import {withRouter} from "react-router-dom";
-import {userProfileAPI} from "../../api/api";
 
 
 class ProfileContainer extends React.Component {
@@ -14,14 +13,7 @@ class ProfileContainer extends React.Component {
 
         if (!userId) userId = 6441
 
-        // this.props.toggleIsFetching(true)
-
-        userProfileAPI.getUserProfile(userId)
-            .then(data => {
-                this.props.setProfile(data);
-                // this.props.setTotalCount(res.data.totalCount);
-                // this.props.toggleIsFetching(false)
-            })
+        this.props.getProfile(userId);
 
     };
 
@@ -39,8 +31,7 @@ class ProfileContainer extends React.Component {
 
         return (
 
-            <Profile addPost={this.addPost} changePostText={this.changePostText} posts={this.props.posts}
-                     newPostText={this.props.newPostText} profile={this.props.profile}/>
+            <Profile addPost={this.addPost} changePostText={this.changePostText} {...this.props}/>
 
         )
     }
@@ -56,7 +47,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = {addPost, changePostText, setProfile, toggleIsFetching}
+let mapDispatchToProps = {addPost, changePostText, getProfile}
 
 let WithURLDataContainerComponent = withRouter(ProfileContainer);
 

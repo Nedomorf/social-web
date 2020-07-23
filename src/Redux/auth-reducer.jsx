@@ -1,3 +1,5 @@
+import {authAPI} from "../api/api";
+
 const SET_USER_DATA = 'SET-USER-DATA';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 
@@ -37,5 +39,16 @@ export const setUserData = (data) => ({
     type: SET_USER_DATA,
     data
 })
+
+export const authMe = () => {
+    return (dispatch) => {
+        authAPI.authMe()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setUserData(data.data));
+                }
+            })
+    }
+}
 
 export default authReducer;

@@ -20,12 +20,7 @@ export const usersAPI = {
 
     unFollowUser(id) {
         return (
-            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
-                withCredentials: true,
-                headers: {
-                    "API-KEY": "6183f663-1903-42f5-a144-b44d307cb69e"
-                }
-            })
+            instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
                 .then(res => {
                     return res.data
                 })
@@ -34,12 +29,7 @@ export const usersAPI = {
 
     followUser(id) {
         return (
-            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
-                withCredentials: true,
-                headers: {
-                    "API-KEY": "6183f663-1903-42f5-a144-b44d307cb69e"
-                }
-            })
+            instance.post(`follow/${id}`)
                 .then(res => {
                     return res.data
                 })
@@ -49,7 +39,16 @@ export const usersAPI = {
 
 export const userProfileAPI = {
     getUserProfile(userId) {
-        return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+        return instance.get(`profile/${userId}`)
+            .then(res => {
+                return res.data
+            })
+    }
+}
+
+export const authAPI = {
+    authMe() {
+        return instance.get(`auth/me`)
             .then(res => {
                 return res.data
             })

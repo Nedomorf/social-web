@@ -262,7 +262,8 @@ class Users extends React.Component {
                                 <div className={style.userData}>
                                     <div>
                                         <NavLink to={`/profile/${user.id}`} className={style.userName}>
-                                            <h2>{user.name}</h2></NavLink>
+                                            <h2>{user.name}</h2>
+                                        </NavLink>
                                         <div className={style.userDescription}>{user.status}</div>
                                     </div>
                                     <div className={style.followingButton}>
@@ -272,22 +273,26 @@ class Users extends React.Component {
                                                 this.props.followingInProcess.some(id => id === user.id)
                                                     ? <div className={style.preloader}><Preloader/></div>
                                                     :
-                                                    <button disabled={this.props.followingInProcess.some(id => id === user.id)} onClick={
-                                                        () => {
-                                                            this.props.unfollow(user.id)
-                                                        }
-                                                    }>Unfollow</button>
+                                                    <button
+                                                        disabled={this.props.followingInProcess.some(id => id === user.id)}
+                                                        onClick={
+                                                            () => {
+                                                                this.props.unfollow(user.id)
+                                                            }
+                                                        }>Unfollow</button>
 
 
                                                 :
                                                 this.props.followingInProcess.some(id => id === user.id)
                                                     ? <div className={style.preloader}><Preloader/></div>
                                                     :
-                                                    <button disabled={this.props.followingInProcess.some(id => id === user.id)} onClick={
-                                                        () => {
-                                                            this.props.follow(user.id);
-                                                        }
-                                                    }>Follow</button>
+                                                    <button
+                                                        disabled={this.props.followingInProcess.some(id => id === user.id)}
+                                                        onClick={
+                                                            () => {
+                                                                this.props.follow(user.id);
+                                                            }
+                                                        }>Follow</button>
                                         }
 
                                     </div>
