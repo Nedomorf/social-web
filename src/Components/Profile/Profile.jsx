@@ -5,6 +5,7 @@ import Preloader from "../Common/Preloader";
 
 import ImagePalette from 'react-image-palette'
 import IMAGE from '../../images/bg.jpg'
+import ProfileStatus from "./ProfileStatus";
 
 function Profile(props) {
 
@@ -19,6 +20,8 @@ function Profile(props) {
     window.imag = imag
 
     // let imm = props.profile.photos.large
+
+    console.log(props.profile)
 
     return (
 
@@ -61,7 +64,7 @@ function Profile(props) {
                                         filter: `blur(20px)`
                                     }}>
                                     </div>
-                                    <div className={style.avatar} style={{position: `relative`, top: `-35vh`}}>
+                                    <div className={style.avatar}>
                                         {
                                             props.profile.photos.large === null
                                                 ?
@@ -78,9 +81,9 @@ function Profile(props) {
                                         }
                                         <div style={{color}}><h1>{props.profile.fullName}</h1></div>
                                     </div>
-                                    <div className={style.description}
-                                         style={{position: `relative`, top: `-45vh`, color}}>
-                                        <h3>{props.profile.aboutMe}</h3>
+                                    <div className={style.description} style={{color}}>
+                                        {/*<h3>{props.profile.aboutMe}</h3>*/}
+                                        <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
                                     </div>
                                 </div>
                             )}

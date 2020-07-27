@@ -1,5 +1,5 @@
 import Profile from "./Profile";
-import {addPost, changePostText, getProfile} from "../../Redux/profile-reducer";
+import {addPost, changePostText, getProfile, updateUserStatus} from "../../Redux/profile-reducer";
 import {connect} from "react-redux";
 import React from "react";
 import {withRouter} from "react-router-dom";
@@ -44,11 +44,12 @@ let mapStateToProps = (state) => {
         posts: state.Profile.posts,
         newPostText: state.Profile.newPostText,
         profile: state.Profile.profile,
+        status: state.Profile.status,
         isFetching: state.Profile.isFetching,
     }
 }
 
-let mapDispatchToProps = {addPost, changePostText, getProfile}
+let mapDispatchToProps = {addPost, changePostText, getProfile, updateUserStatus}
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),

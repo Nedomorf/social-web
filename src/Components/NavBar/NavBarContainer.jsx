@@ -19,6 +19,7 @@ class NavBarContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
+    isFetching: state.auth.isFetching,
     login: state.auth.login
 });
 

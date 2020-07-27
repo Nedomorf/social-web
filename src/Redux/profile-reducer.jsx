@@ -4,6 +4,7 @@ const ADD_POST = 'ADD-POST';
 const CHANGE_POST_TEXT = 'CHANGE-POST-TEXT';
 const SET_PROFILE = 'SET-PROFILE';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const SET_STATUS = 'SET-STATUS';
 
 let id = 0;
 
@@ -19,6 +20,7 @@ let initialState = {
     ],
     newPostText: "New post...",
     profile: null,
+    status: '',
     isFetching: false
 };
 
@@ -46,6 +48,11 @@ let profileReducer = (state = initialState, action) => {
                 ...state,
                 profile: action.profile
             }
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
         case TOGGLE_IS_FETCHING:
             return {
                 ...state,
@@ -72,6 +79,11 @@ export const setProfile = (profile) => ({
     profile
 })
 
+export const setStatus = (status) => ({
+    type: SET_STATUS,
+    status
+})
+
 export const toggleIsFetching = (isFetching) => ({
     type: TOGGLE_IS_FETCHING,
     isFetching
@@ -87,7 +99,26 @@ export const getProfile = (userId) => {
                 // this.props.setTotalCount(res.data.totalCount);
                 dispatch(toggleIsFetching(false))
             })
+        userProfileAPI.getUserStatus(userId)
+            .then(data => {
+                dispatch(setStatus(data));
+                // this.props.setTotalCount(res.data.totalCount);
+                dispatch(toggleIsFetching(false))
+            })
 
+    }
+}
+
+export const updateUserStatus = (status) => {
+    return (dispatch) => {
+        userProfileAPI.updateUserStatus(status)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setStatus(data));
+                }
+                // this.props.setTotalCount(res.data.totalCount);
+                dispatch(toggleIsFetching(false))
+            })
     }
 }
 

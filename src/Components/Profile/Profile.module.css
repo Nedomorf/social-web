@@ -16,12 +16,11 @@
 .avatar {
     display: grid;
     grid-template-columns: 1fr 4fr;
+    position: relative;
+    top: -35vh;
     /*transform: scale(0.9);*/
     /*box-shadow: 0px 0px 20px 25px;*/
     /*border-radius: 35px;*/
-}
-.avatar h1 {
-    /*color: #f9c300;*/
 }
 
 .avatarImg {
@@ -45,4 +44,17 @@
 
 .posts {
     position: relative;
+}
+
+.description {
+    position: relative;
+    top: -45vh;
+    margin: -25px 300px 0px 300px;
+    border-radius: 10px;
+    transition: background .15s, opacity .15s;
+}
+
+.description:hover {
+    background: #616161;
+    opacity: .8;
 }

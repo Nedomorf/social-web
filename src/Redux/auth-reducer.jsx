@@ -40,13 +40,20 @@ export const setUserData = (data) => ({
     data
 })
 
+export const toggleIsFetching = (isFetching) => ({
+    type: TOGGLE_IS_FETCHING,
+    isFetching
+})
+
 export const authMe = () => {
     return (dispatch) => {
+        dispatch(toggleIsFetching(true))
         authAPI.authMe()
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(setUserData(data.data));
                 }
+                dispatch(toggleIsFetching(false))
             })
     }
 }
