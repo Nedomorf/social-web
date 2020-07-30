@@ -35,16 +35,16 @@ let mapStateToProps = (state) => {
         profile: state.Profile.profile,
         status: state.Profile.status,
         isFetching: state.Profile.isFetching,
-        myId: state.auth.id
+        myId: state.auth.data.id
     }
 }
 
 let mapDispatchToProps = {addPost, getProfile, updateUserStatus}
 
 export default compose(
+    withAuthRedirect,
     connect(mapStateToProps, mapDispatchToProps),
     withRouter,
-    withAuthRedirect
 )(ProfileContainer)
 
 // let authRedirectContainer = withAuthRedirect(ProfileContainer);

@@ -5,9 +5,11 @@ const SET_USER_DATA = 'SET-USER-DATA';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 
 let initialState = {
-    id: null,
-    email: null,
-    login: null,
+    data: {
+        id: null,
+        email: null,
+        login: null
+    },
     isFetching: false,
     isAuth: false
 };
@@ -23,7 +25,7 @@ let authReducer = (state = initialState, action) => {
             }
 
         case TOGGLE_IS_FETCHING:
-            return  {
+            return {
                 ...state,
                 isFetching: action.isFetching
             }
@@ -35,10 +37,9 @@ let authReducer = (state = initialState, action) => {
 
 }
 
-export const setUserData = (id, login, email, isAuth) => ({
+export const setUserData = (data, isAuth) => ({
     type: SET_USER_DATA,
-    payload: {id, login, email, isAuth},
-    isAuth
+    payload: {data, isAuth},
 })
 
 export const toggleIsFetching = (isFetching) => ({
@@ -49,11 +50,11 @@ export const toggleIsFetching = (isFetching) => ({
 export const authMe = () => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
-        authAPI.authMe()
+        return authAPI.authMe()
             .then(data => {
                 if (data.resultCode === 0) {
-                    let {id, login, email} = data.data;
-                    dispatch(setUserData(id, login, email, true));
+                    // let {id, login, email} = data.data;
+                    dispatch(setUserData(data.data, true));
                 }
                 dispatch(toggleIsFetching(false))
             })
@@ -64,11 +65,11 @@ export const login = (formData) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
         authAPI.login(formData)
-            .then(res => {
-                if (res.data.resultCode === 0) {
+            .then(data => {
+                if (data.resultCode === 0) {
                     dispatch(authMe());
-                } else if (res.data.resultCode === 1) {
-                    let errorMessage = res.data.messages.length > 0 ? res.data.messages[0] : "Some error."
+                } else if (data.resultCode === 1) {
+                    let errorMessage = data.messages.length > 0 ? data.messages[0] : "Some error."
                     let action = stopSubmit('login', {_error: errorMessage});
                     dispatch(action)
                 }
