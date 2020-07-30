@@ -1,0 +1,57 @@
+.Login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 6.5vh);
+}
+
+.loginArea {
+    background-color: rgba(0, 128, 0, .6);
+    width: 70vw;
+    height: 70vh;
+    border-radius: 35px;
+    overflow: auto;
+}
+
+.loginArea h1 {
+    margin-top: 10vh;
+    color: #f9c300;
+}
+
+.btn {
+    background: #f9c300;
+    color: #0e1d27;
+    border-radius: 30px;
+    width: 6.5vw;
+    height: 4.5vh;
+    margin-left: 18vw;
+}
+
+.Field {
+    width: 70%;
+    border-radius: 30px;
+    padding: 1em;
+    margin: 0 1em 4em 1em;
+    font-size: 1em;
+    background: #0e1d27;
+    color: #f9c300;
+}
+
+.Form {
+    margin-top: 10vh;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1.5);
+    width: 50vw;
+    margin-top: 3vh;
+}
+
+.rememberMe {
+    margin-left: 13.5vw;
+}
+
+

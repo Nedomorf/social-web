@@ -6,6 +6,10 @@
 .formField.error textarea {
     border: red 2px solid;
 }
-.formField.error span {
+.formField.error div {
     color: red;
+}
+
+.commonError {
+    border: red 2px solid;
 }

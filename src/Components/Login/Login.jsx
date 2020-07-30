@@ -1,4 +1,6 @@
 import React from 'react';
+import style from './Login.module.css';
+import errorStyle from '../Common/FormsFields/FormsFields.module.css';
 import {Field, reduxForm} from "redux-form";
 import {Input} from "../Common/FormsFields/FormsFields";
 import {maxLengthCreator, minLengthCreator, required} from "../../utils/validators/validators";
@@ -11,9 +13,10 @@ const minLength8 = minLengthCreator(8);
 
 const LoginForm = (props) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit} className={style.Form}>
             <div>
                 <Field
+                    className={style.Field}
                     type="text"
                     placeholder="Email"
                     name={"email"}
@@ -23,6 +26,7 @@ const LoginForm = (props) => {
             </div>
             <div>
                 <Field
+                    className={style.Field}
                     type="password"
                     placeholder="Password"
                     name={"password"}
@@ -30,15 +34,23 @@ const LoginForm = (props) => {
                     validate={[required, minLength8]}
                 />
             </div>
-            <div>
-                <Field
-                    type="checkbox"
-                    name={"rememberMe"}
-                    component={"input"}
-                />
-                Remember me
+            {
+                props.error &&
+                <div className={errorStyle.commonError}>
+                    {props.error}
+                </div>
+            }
+            <div className={style.controls}>
+                <div style={{color: `#0e1d27`, fontWeigh: `bolder`, fontSize: `1em`}}>
+                    <Field className={style.rememberMe}
+                           type="checkbox"
+                           name={"rememberMe"}
+                           component={"input"}
+                    />
+                    Remember me
+                </div>
+                <button className={style.btn}>Login</button>
             </div>
-            <button>Login</button>
         </form>
     )
 }
@@ -52,12 +64,14 @@ const Login = (props) => {
         props.login(formData);
     }
 
-    if (props.isAuth) return <Redirect to={"/profile"} />
+    if (props.isAuth) return <Redirect to={"/profile"}/>
 
     return (
-        <div>
-            <h1>LOGIN</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+        <div className={style.Login}>
+            <div className={style.loginArea}>
+                <h1>LOGIN</h1>
+                <LoginReduxForm onSubmit={onSubmit}/>
+            </div>
         </div>
     )
 }

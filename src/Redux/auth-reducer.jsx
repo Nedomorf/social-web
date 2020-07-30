@@ -1,4 +1,5 @@
 import {authAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET-USER-DATA';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
@@ -34,9 +35,9 @@ let authReducer = (state = initialState, action) => {
 
 }
 
-export const setUserData = (data, isAuth) => ({
+export const setUserData = (id, login, email, isAuth) => ({
     type: SET_USER_DATA,
-    payload: {data, isAuth},
+    payload: {id, login, email, isAuth},
     isAuth
 })
 
@@ -51,7 +52,8 @@ export const authMe = () => {
         authAPI.authMe()
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(setUserData(data.data, true));
+                    let {id, login, email} = data.data;
+                    dispatch(setUserData(id, login, email, true));
                 }
                 dispatch(toggleIsFetching(false))
             })
@@ -65,6 +67,10 @@ export const login = (formData) => {
             .then(res => {
                 if (res.data.resultCode === 0) {
                     dispatch(authMe());
+                } else if (res.data.resultCode === 1) {
+                    let errorMessage = res.data.messages.length > 0 ? res.data.messages[0] : "Some error."
+                    let action = stopSubmit('login', {_error: errorMessage});
+                    dispatch(action)
                 }
                 dispatch(toggleIsFetching(false))
             })
