@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from "./NavBar";
 import {connect} from "react-redux";
-import {authMe} from "../../Redux/auth-reducer";
+import {authMe, logout} from "../../Redux/auth-reducer";
 
 class NavBarContainer extends React.Component {
 
@@ -24,7 +24,8 @@ let mapStateToProps = (state) => ({
 });
 
 let mapDispatchToProps = ({
-    authMe
+    authMe,
+    logout
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBarContainer);

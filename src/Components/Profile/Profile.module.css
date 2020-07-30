@@ -28,19 +28,6 @@
     height: 200px;
     margin: 30px;
 }
- .addPost {
-     height: 5vh;
-     display: grid;
-     grid-template-columns: 5fr 1fr;
-     padding-top: 30px;
-     padding-bottom: 30px;
- }
-.addPost textarea {
-    max-height: 5vh;
-    min-height: 5vh;
-    max-width: 58vw;
-    min-width: 58vw;
-}
 
 .posts {
     position: relative;
@@ -58,3 +45,19 @@
     background: #616161;
     opacity: .8;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

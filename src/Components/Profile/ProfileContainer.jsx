@@ -1,5 +1,5 @@
 import Profile from "./Profile";
-import {addPost, changePostText, getProfile, updateUserStatus} from "../../Redux/profile-reducer";
+import {addPost, getProfile, updateUserStatus} from "../../Redux/profile-reducer";
 import {connect} from "react-redux";
 import React from "react";
 import {withRouter} from "react-router-dom";
@@ -19,20 +19,10 @@ class ProfileContainer extends React.Component {
 
     };
 
-
-    changePostText = (e) => {
-        let newPostText = e.target.value;
-        this.props.changePostText(newPostText);
-    };
-
-    addPost = () => {
-        this.props.addPost();
-    };
-
     render() {
         return (
 
-            <Profile addPost={this.addPost} changePostText={this.changePostText} {...this.props}/>
+            <Profile {...this.props}/>
 
         )
     }
@@ -42,14 +32,13 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         posts: state.Profile.posts,
-        newPostText: state.Profile.newPostText,
         profile: state.Profile.profile,
         status: state.Profile.status,
         isFetching: state.Profile.isFetching,
     }
 }
 
-let mapDispatchToProps = {addPost, changePostText, getProfile, updateUserStatus}
+let mapDispatchToProps = {addPost, getProfile, updateUserStatus}
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),

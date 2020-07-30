@@ -36,20 +36,22 @@ class ProfileStatus extends React.Component {
 
     render() {
 
-        let statusText;
-        this.state.status
-            ? this.statusText = this.state.status
-            : this.statusText = 'Изменить статус...'
-
         return (
             <>
                 {
                     !this.state.editMode
                         ? <div onClick={this.enableEditMode}>
-                            <h3>{this.statusText}</h3>
+                            <h3>
+                                {
+                                    this.state.status
+                                        ? this.state.status
+                                        : 'Изменить статус...'
+                                }
+                            </h3>
                         </div>
+
                         : <div onBlur={this.disableEditMode}>
-                            <input type="text" value={this.statusText} onChange={this.onStatusChange} autoFocus={true}/>
+                            <input type="text" value={this.state.status} onChange={this.onStatusChange} autoFocus={true}/>
                         </div>
                 }
             </>

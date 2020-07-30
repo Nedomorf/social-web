@@ -19,7 +19,7 @@ function NavBar(props) {
                         <NavLink to="/users" className={style.navItem}>Users</NavLink>
                         <div className={style.navItem}>
                             <div className={`${style.userStateWrapper} ${style.logout}`}>
-                                <div className={style.userState}>
+                                <div className={style.userState} onClick={props.logout}>
                                     <div>Logout</div>
                                     <div className={style.userDataImage}>
                                         <img src="http://pluspng.com/img-png/user-png-icon-young-user-icon-2400.png"

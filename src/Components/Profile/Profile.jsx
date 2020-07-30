@@ -6,6 +6,7 @@ import Preloader from "../Common/Preloader";
 import ImagePalette from 'react-image-palette'
 import IMAGE from '../../images/bg.jpg'
 import ProfileStatus from "./ProfileStatus";
+import AddPostForm from "./AddPostForm";
 
 function Profile(props) {
 
@@ -94,10 +95,11 @@ function Profile(props) {
 
 
                 <div className={style.posts} style={{marginTop: `-35vh`}}>
-                    <div className={style.addPost}>
-                        <textarea onChange={props.changePostText} value={props.newPostText}/>
-                        <button onClick={props.addPost}>Отправить</button>
-                    </div>
+                    <AddPostForm {...props}/>
+                    {/*<div className={style.addPost}>*/}
+                    {/*    <textarea onChange={props.changePostText} value={props.newPostText}/>*/}
+                    {/*    <button onClick={props.addPost}>Отправить</button>*/}
+                    {/*</div>*/}
                     <div className={style.postsArea}>
                         {postItem}
                     </div>

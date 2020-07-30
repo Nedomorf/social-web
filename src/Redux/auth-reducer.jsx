@@ -18,8 +18,7 @@ let authReducer = (state = initialState, action) => {
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload
             }
 
         case TOGGLE_IS_FETCHING:
@@ -35,9 +34,10 @@ let authReducer = (state = initialState, action) => {
 
 }
 
-export const setUserData = (data) => ({
+export const setUserData = (data, isAuth) => ({
     type: SET_USER_DATA,
-    data
+    payload: {data, isAuth},
+    isAuth
 })
 
 export const toggleIsFetching = (isFetching) => ({
@@ -51,7 +51,33 @@ export const authMe = () => {
         authAPI.authMe()
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(setUserData(data.data));
+                    dispatch(setUserData(data.data, true));
+                }
+                dispatch(toggleIsFetching(false))
+            })
+    }
+}
+
+export const login = (formData) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+        authAPI.login(formData)
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(authMe());
+                }
+                dispatch(toggleIsFetching(false))
+            })
+    }
+}
+
+export const logout = () => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+        authAPI.logout()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setUserData(null, false));
                 }
                 dispatch(toggleIsFetching(false))
             })
