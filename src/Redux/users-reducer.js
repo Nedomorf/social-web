@@ -183,7 +183,7 @@ export const toggleFollowingProcess = (isFetching, id) => ({
 //     id
 // })
 
-export const getUsers = (page, count) => {
+export const requestUsers = (page, count) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true));
         usersAPI.getUsers(page, count)

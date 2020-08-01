@@ -3,12 +3,13 @@ import style from './Users.module.css';
 // import User from "./User/User";
 import {NavLink} from "react-router-dom";
 import Preloader from "../Common/Preloader";
+import {requestUsers} from "../../Redux/users-reducer";
 
 class Users extends React.Component {
 
     componentDidMount() {
 
-        this.props.getUsers(this.props.page, this.props.count);
+        this.props.requestUsers(this.props.page, this.props.count);
 
     };
 
@@ -58,9 +59,9 @@ class Users extends React.Component {
             this.props.switchRightPage(true)
         }
 
-        this.props.getUsers(page, this.props.count);
+        this.props.requestUsers(page, this.props.count);
         // this.props.toggleIsFetching(true)
-        // usersAPI.getUsers(page, this.props.count)
+        // usersAPI.requestUsers(page, this.props.count)
         //     .then(data => {
         //         this.props.setUsers(data.items);
         //         this.props.toggleIsFetching(false)
@@ -91,9 +92,9 @@ class Users extends React.Component {
             ? this.props.switchRightPage(false)
             : this.props.switchRightPage(true)
 
-        this.props.getUsers(page, this.props.count)
+        this.props.requestUsers(page, this.props.count)
         // this.props.toggleIsFetching(true)
-        // usersAPI.getUsers(page, this.props.count)
+        // usersAPI.requestUsers(page, this.props.count)
         //     .then(data => {
         //         this.props.setUsers(data.items);
         //         this.props.toggleIsFetching(false)
