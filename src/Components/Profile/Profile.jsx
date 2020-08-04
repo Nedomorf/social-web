@@ -9,6 +9,7 @@ import ProfileStatus from "./ProfileStatus";
 import AddPostForm from "./AddPostForm";
 import ProfileAvatar from "./ProfileAvatar";
 import Modal from 'react-awesome-modal';
+import Popup from "../Common/Popup";
 
 function Profile(props) {
 
@@ -29,12 +30,10 @@ function Profile(props) {
 
     let postItem = props.posts.map(post => <Post key={post.postId} post={post.post}/>);
 
-    let imag = props.profile.photos.large
-    window.imag = imag
-
-    // let imm = props.profile.photos.large
-
     console.log(props.profile)
+
+    let avatarStyle = {width: `200px`, height: `200px`, margin: `30px`};
+    let modalAvatarStyle = {width: `500px`, height: `500px`, margin: `30px`};
 
     return (
 
@@ -59,13 +58,17 @@ function Profile(props) {
 
                 {
                     props.isFetching
-                        ? <div style={{
+                        ?
+                        <div style={{
                             marginBottom: `33vh`,
                             height: `38vh`,
                             display: `flex`,
                             alignItems: `center`,
                             justifyContent: `center`
-                        }}><Preloader style={{transform: `scale(2)`}}/></div>
+                        }}>
+                            <Preloader style={{transform: `scale(2)`}}/>
+                        </div>
+
                         : <ImagePalette image={IMAGE}>
 
                             {({backgroundColor, color, alternativeColor}) => (
@@ -79,7 +82,10 @@ function Profile(props) {
                                     </div>
                                     <div className={style.avatar}>
                                         <div onClick={openModal}>
-                                            <ProfileAvatar profilePhoto={props.profile.photos.large}/>
+                                            <ProfileAvatar
+                                                profilePhoto={props.profile.photos.large}
+                                                color={color}
+                                                avatarStyle={avatarStyle}/>
                                         </div>
                                         <div style={{color}}><h1>{props.profile.fullName}</h1></div>
                                     </div>
@@ -87,6 +93,26 @@ function Profile(props) {
                                         {/*<h3>{props.profile.aboutMe}</h3>*/}
                                         <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
                                     </div>
+
+                                    {/*<Modal visible={visible} width="1000px" height="600px" effect="fadeInDown"*/}
+                                    {/*       onClickAway={closeModal}>*/}
+                                    {/*    <div>*/}
+                                    {/*        <ProfileAvatar*/}
+                                    {/*            profilePhoto={props.profile.photos.large}*/}
+                                    {/*            color={color}*/}
+                                    {/*            avatarStyle={modalAvatarStyle}*/}
+                                    {/*        />*/}
+                                    {/*    </div>*/}
+                                    {/*</Modal>*/}
+
+                                    <Popup
+                                        profilePhoto={props.profile.photos.large}
+                                        color={color}
+                                        avatarStyle={modalAvatarStyle}
+                                        visible={visible}
+                                        setVisible={setVisible}
+                                    />
+
                                 </div>
                             )}
 
@@ -107,11 +133,7 @@ function Profile(props) {
                 </div>
 
             </div>
-            <Modal visible={visible} width="400" height="300" effect="fadeInDown" onClickAway={closeModal}>
-                <div>
-                    <ProfileAvatar profilePhoto={props.profile.photos.large}/>
-                </div>
-            </Modal>
+
         </div>
     );
 

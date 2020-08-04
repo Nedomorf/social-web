@@ -5,8 +5,8 @@ export const Textarea = ({input, meta, ...props}) => {
     const hasError = meta.touched && meta.error;
     return (
         <div className={`${style.formField} ${hasError ? style.error : ""}`}>
-            { hasError && <div>{meta.error}</div> }
             <textarea {...input} {...props} />
+            { hasError && <div>{meta.error}</div> }
         </div>
     )
 }

@@ -1,32 +1,29 @@
 import React from "react";
-import ImagePalette from "react-image-palette";
-import IMAGE from "../../images/bg.jpg";
-import style from "./Profile.module.css";
 
 const ProfileAvatar = (props) => {
+    let avatarStyle = props.avatarStyle;
     return (
-        <ImagePalette image={IMAGE}>
+        <div>
+            {
+                props.profilePhoto === null
+                    ?
+                    <img
+                        src="http://pluspng.com/img-png/user-png-icon-young-user-icon-2400.png"
+                        alt="profile-ava"
+                        // style={{borderColor: props.color}}
+                        // style={props.avatarStyle}
+                        style={avatarStyle && Object.assign(avatarStyle, {borderColor: props.color})}
+                    />
+                    : <img src={props.profilePhoto} alt="profile-ava"
+                           style={avatarStyle && Object.assign(avatarStyle, {
+                               borderRadius: `100%`,
+                               borderColor: props.color,
+                               borderStyle: `solid`
+                           })}
+                    />
+            }
+        </div>
 
-            {({backgroundColor, color, alternativeColor}) => (
-                <div>
-                    {
-                        props.profilePhoto === null
-                            ?
-                            <img
-                                src="http://pluspng.com/img-png/user-png-icon-young-user-icon-2400.png"
-                                alt="profile-ava"
-                                className={style.avatarImg} style={{borderColor: color}}/>
-                            : <img src={props.profilePhoto} alt="profile-ava"
-                                   className={style.avatarImg} style={{
-                                borderColor: color,
-                                borderStyle: `solid`,
-                                borderRadius: `100%`
-                            }}/>
-                    }
-                </div>
-            )}
-
-        </ImagePalette>
     )
 }
 
