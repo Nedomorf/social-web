@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import style from './Profile.module.css';
 import Post from "./Post/Post";
 import Preloader from "../Common/Preloader";
@@ -7,8 +7,20 @@ import ImagePalette from 'react-image-palette'
 import IMAGE from '../../images/bg.jpg'
 import ProfileStatus from "./ProfileStatus";
 import AddPostForm from "./AddPostForm";
+import ProfileAvatar from "./ProfileAvatar";
+import Modal from 'react-awesome-modal';
 
 function Profile(props) {
+
+    let [visible, setVisible] = useState(false);
+
+    const closeModal = () => {
+        setVisible(false);
+    }
+
+    const openModal = () => {
+        setVisible(true);
+    }
 
     if (!props.profile) {
         let style = {marginTop: `calc(50vh - 10vh)`, scale: '2'};
@@ -66,20 +78,9 @@ function Profile(props) {
                                     }}>
                                     </div>
                                     <div className={style.avatar}>
-                                        {
-                                            props.profile.photos.large === null
-                                                ?
-                                                <img
-                                                    src="http://pluspng.com/img-png/user-png-icon-young-user-icon-2400.png"
-                                                    alt="profile-ava"
-                                                    className={style.avatarImg} style={{borderColor: color}}/>
-                                                : <img src={props.profile.photos.large} alt="profile-ava"
-                                                       className={style.avatarImg} style={{
-                                                    borderColor: color,
-                                                    borderStyle: `solid`,
-                                                    borderRadius: `100%`
-                                                }}/>
-                                        }
+                                        <div onClick={openModal}>
+                                            <ProfileAvatar profilePhoto={props.profile.photos.large}/>
+                                        </div>
                                         <div style={{color}}><h1>{props.profile.fullName}</h1></div>
                                     </div>
                                     <div className={style.description} style={{color}}>
@@ -106,6 +107,11 @@ function Profile(props) {
                 </div>
 
             </div>
+            <Modal visible={visible} width="400" height="300" effect="fadeInDown" onClickAway={closeModal}>
+                <div>
+                    <ProfileAvatar profilePhoto={props.profile.photos.large}/>
+                </div>
+            </Modal>
         </div>
     );
 

@@ -1,62 +1,54 @@
-import React from 'react';
+import React, {useState} from 'react';
 import style from './Profile.module.css';
 
-class ProfileStatus extends React.Component {
+const ProfileStatus = (props) => {
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.status !== this.props.status) {
-            this.setState({
-                status: this.props.status
-            })
-        }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if (prevProps.status !== this.props.status) {
+    //         this.setState({
+    //             status: this.props.status
+    //         })
+    //     }
+    // }
+    //
+    // state = {
+    //     editMode: false,
+    //     status: this.props.status
+    // }
+
+    let [editMode, setEditMode] = useState(false);
+    let [status, setStatus] = useState(props.status || 'Изменить статус...');
+
+
+    const enableEditMode = () => {
+        setEditMode(true);
+    }
+    const disableEditMode = () => {
+        setEditMode(false);
+        props.updateUserStatus(status);
     }
 
-    state = {
-        editMode: false,
-        status: this.props.status
+    const onStatusChange = (e) => {
+        setStatus(e.currentTarget.value);
     }
 
-    enableEditMode = () => {
-        this.setState({
-            editMode: true
-        })
-    }
-    disableEditMode = (e) => {
-        this.setState({
-            editMode: false,
-        })
-        this.props.updateUserStatus(this.state.status);
-    }
 
-    onStatusChange = (e) => {
-        this.setState({
-            status: e.currentTarget.value
-        })
-    }
+    return (
+        <>
+            {
+                !editMode
+                    ? <div onClick={enableEditMode}>
+                        <h3>
+                            {status}
+                        </h3>
+                    </div>
 
-    render() {
-
-        return (
-            <>
-                {
-                    !this.state.editMode
-                        ? <div onClick={this.enableEditMode}>
-                            <h3>
-                                {
-                                    this.state.status
-                                        ? this.state.status
-                                        : 'Изменить статус...'
-                                }
-                            </h3>
-                        </div>
-
-                        : <div onBlur={this.disableEditMode}>
-                            <input type="text" value={this.state.status} onChange={this.onStatusChange} autoFocus={true}/>
-                        </div>
-                }
-            </>
-        )
-    }
+                    : <div onBlur={disableEditMode}>
+                        <input type="text" value={status} onChange={onStatusChange} autoFocus={true}/>
+                    </div>
+            }
+        </>
+    )
 }
 
 export default ProfileStatus;
