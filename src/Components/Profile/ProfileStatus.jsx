@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import style from './Profile.module.css';
+import React, {useEffect, useState} from 'react';
 
 const ProfileStatus = (props) => {
 
@@ -17,7 +16,11 @@ const ProfileStatus = (props) => {
     // }
 
     let [editMode, setEditMode] = useState(false);
-    let [status, setStatus] = useState(props.status || 'Изменить статус...');
+    let [status, setStatus] = useState(props.status);
+
+    useEffect( () => {
+        setStatus(props.status)
+    }, [props.status] )
 
 
     const enableEditMode = () => {

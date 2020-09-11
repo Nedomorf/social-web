@@ -4963,6 +4963,11 @@ gensync@^1.0.0-beta.1:
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"
   integrity sha512-r8EC6NO1sngH/zdD9fiRDLdcgnbayXah+mLgManTaIZJqEC1MZstmnox8KpnI2/fxQwrp5OpCOYWLp4rBl4Jcg==
 
+get-average-color@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/get-average-color/-/get-average-color-0.0.6.tgz#10b50f9984e0db6f2397dd0d186cca48d0fd1ae3"
+  integrity sha512-rYV3yYW8JfLvPFRfZvlyQC/fOO6sjxSiXu3SnmDP5pRZIyBHYKw0jU52hAGFelZgScDAOcYhua0L3lbTZQg3Mg==
+
 get-caller-file@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.3.tgz#f978fa4c90d1dfe7ff2d6beda2a515e713bdcf4a"
@@ -8959,11 +8964,6 @@ react-app-polyfill@^1.0.6:
     raf "^3.4.1"
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
-
-react-awesome-modal@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/react-awesome-modal/-/react-awesome-modal-2.0.5.tgz#d19702f7e3bc1f43e734f5a60814c2d1593c693a"
-  integrity sha512-H+0xKBhcGJCoDtMww5K+XUzQtK+oRNpXr1VZoN1tbBgu+fzrLrF+ZkdRC1XiPLJ5gpVd9uR90yg8nyPTtYj/OQ==
 
 react-burger-menu@^2.7.0:
   version "2.7.0"

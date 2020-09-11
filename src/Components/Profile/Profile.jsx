@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import style from './Profile.module.css';
 import Post from "./Post/Post";
 import Preloader from "../Common/Preloader";
@@ -8,10 +8,28 @@ import IMAGE from '../../images/bg.jpg'
 import ProfileStatus from "./ProfileStatus";
 import AddPostForm from "./AddPostForm";
 import ProfileAvatar from "./ProfileAvatar";
-import Modal from 'react-awesome-modal';
 import Popup from "../Common/Popup";
 
+import getAverageColor from 'get-average-color';
+
 function Profile(props) {
+
+    useEffect(() => {
+        let DIV = document.getElementById('avatarArea');
+        if (DIV) {
+            props.profile.photos.large
+                ?
+                getAverageColor(props.profile.photos.large).then(rgb => {
+                    console.log(rgb);
+                    DIV.style.background = `rgb(` + rgb.r + `, ` + rgb.g + `, ` + rgb.b + `)`;
+                })
+                :
+                getAverageColor(IMAGE).then(rgb => {
+                    console.log(rgb);
+                    DIV.style.background = `rgb(` + rgb.r + `, ` + rgb.g + `, ` + rgb.b + `)`;
+                })
+        }
+    })
 
     let [visible, setVisible] = useState(false);
 
@@ -28,6 +46,14 @@ function Profile(props) {
         return <Preloader style={style}/>
     }
 
+    // let [RGB, setRGB] = useState({r: 255, g: 255, b: 255});
+    // const setColor = (rgb) => {
+    //     setRGB({rgb});
+    //     console.log(rgb);
+    // }
+    // let imag = 'http://pluspng.com/img-png/user-png-icon-young-user-icon-2400.png'
+
+
     let postItem = props.posts.map(post => <Post key={post.postId} post={post.post}/>);
 
     console.log(props.profile)
@@ -38,6 +64,7 @@ function Profile(props) {
     return (
 
         <div className={style.Profile}>
+            <div id="123">123</div>
             <div className={style.profileArea}>
 
                 {/*<div className={style.avatar}>*/}
@@ -69,57 +96,50 @@ function Profile(props) {
                             <Preloader style={{transform: `scale(2)`}}/>
                         </div>
 
-                        : <ImagePalette image={IMAGE}>
+                        :
 
-                            {({backgroundColor, color, alternativeColor}) => (
-                                <div>
-                                    <div style={{
-                                        backgroundColor,
-                                        height: `35vh`,
-                                        position: `relative`,
-                                        filter: `blur(20px)`
-                                    }}>
-                                    </div>
-                                    <div className={style.avatar}>
-                                        <div onClick={openModal}>
-                                            <ProfileAvatar
-                                                profilePhoto={props.profile.photos.large}
-                                                color={color}
-                                                avatarStyle={avatarStyle}/>
-                                        </div>
-                                        <div style={{color}}><h1>{props.profile.fullName}</h1></div>
-                                    </div>
-                                    <div className={style.description} style={{color}}>
-                                        {/*<h3>{props.profile.aboutMe}</h3>*/}
-                                        <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
-                                    </div>
-
-                                    {/*<Modal visible={visible} width="1000px" height="600px" effect="fadeInDown"*/}
-                                    {/*       onClickAway={closeModal}>*/}
-                                    {/*    <div>*/}
-                                    {/*        <ProfileAvatar*/}
-                                    {/*            profilePhoto={props.profile.photos.large}*/}
-                                    {/*            color={color}*/}
-                                    {/*            avatarStyle={modalAvatarStyle}*/}
-                                    {/*        />*/}
-                                    {/*    </div>*/}
-                                    {/*</Modal>*/}
-
-                                    <Popup
+                        <div>
+                            <div id='avatarArea' style={{
+                                height: `35vh`,
+                                position: `relative`,
+                                filter: `blur(10px)`
+                            }}>
+                            </div>
+                            <div className={style.avatar}>
+                                <div onClick={openModal}>
+                                    <ProfileAvatar
                                         profilePhoto={props.profile.photos.large}
-                                        color={color}
-                                        avatarStyle={modalAvatarStyle}
-                                        visible={visible}
-                                        setVisible={setVisible}
-                                    />
-
+                                        avatarStyle={avatarStyle}/>
                                 </div>
-                            )}
+                                <div><h1>{props.profile.fullName}</h1></div>
+                            </div>
+                            <div className={style.description}>
+                                {/*<h3>{props.profile.aboutMe}</h3>*/}
+                                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+                            </div>
 
-                        </ImagePalette>
+                            {/*<Modal visible={visible} width="1000px" height="600px" effect="fadeInDown"*/}
+                            {/*       onClickAway={closeModal}>*/}
+                            {/*    <div>*/}
+                            {/*        <ProfileAvatar*/}
+                            {/*            profilePhoto={props.profile.photos.large}*/}
+                            {/*            color={color}*/}
+                            {/*            avatarStyle={modalAvatarStyle}*/}
+                            {/*        />*/}
+                            {/*    </div>*/}
+                            {/*</Modal>*/}
+
+                            <Popup
+                                profilePhoto={props.profile.photos.large}
+                                avatarStyle={modalAvatarStyle}
+                                visible={visible}
+                                setVisible={setVisible}
+                            />
+
+                        </div>
+
 
                 }
-
 
                 <div className={style.posts} style={{marginTop: `-35vh`}}>
                     <AddPostForm {...props}/>
@@ -128,7 +148,7 @@ function Profile(props) {
                     {/*    <button onClick={props.addPost}>Отправить</button>*/}
                     {/*</div>*/}
                     <div className={style.postsArea}>
-                        {postItem}
+                        {postItem.reverse()}
                     </div>
                 </div>
 

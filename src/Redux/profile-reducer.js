@@ -18,7 +18,7 @@ let initialState = {
         {postId: `${++id}`, post: "loool"},
     ],
     profile: null,
-    status: '',
+    status: 'Изменить статус...',
     isFetching: false
 };
 

@@ -20,7 +20,7 @@ const Popup = (props) => {
                     avatarStyle={modalAvatarStyle}
                 />
                 <div onClick={closeModal} className={style.close}>
-                    <img src="https://img.icons8.com/color/48/000000/close-window.png"/>
+                    <img src="https://img.icons8.com/color/48/000000/close-window.png" alt='close-modal'/>
                 </div>
             </div>
         </div>

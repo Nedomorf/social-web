@@ -8,7 +8,7 @@
     bottom: 0;
     margin: auto;
     background-color: rgba(0,0,0, 0.5);
-    z-index: 999;
+    z-index: 9999;
     opacity: 0;
     visibility: hidden;
     transition: all .5s ease 0s;
@@ -29,7 +29,7 @@
     margin: auto;
     border-radius: 30px;
     opacity: 0;
-    transform: perspective(10000px) translate(0, -100%) rotateX(45deg);
+    transform: perspective(9999px) translate(0, -100%) rotateX(45deg);
     transition: all .5s ease 0s;
     background: #373a47;
 }
