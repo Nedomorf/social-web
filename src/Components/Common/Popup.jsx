@@ -13,10 +13,9 @@ const Popup = (props) => {
     return (
         <div className={`${style.popup} ${props.visible && style.open}`}>
             <div className={style.popupBody} onClick={closeModal}/>
-            <div className={style.popupInner}>
+            <div className={style.popupInner} style={{ background: `rgb(` + props.RGB.r + `, ` + props.RGB.g + `, ` + props.RGB.b + `)` }}>
                 <ProfileAvatar
                     profilePhoto={props.profilePhoto}
-                    color={props.color}
                     avatarStyle={modalAvatarStyle}
                 />
                 <div onClick={closeModal} className={style.close}>

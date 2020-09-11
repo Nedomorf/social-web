@@ -3,8 +3,7 @@ import style from './Profile.module.css';
 import Post from "./Post/Post";
 import Preloader from "../Common/Preloader";
 
-import ImagePalette from 'react-image-palette'
-import IMAGE from '../../images/bg.jpg'
+import IMAGE from '../../images/git-profile.jpg'
 import ProfileStatus from "./ProfileStatus";
 import AddPostForm from "./AddPostForm";
 import ProfileAvatar from "./ProfileAvatar";
@@ -14,6 +13,7 @@ import getAverageColor from 'get-average-color';
 
 function Profile(props) {
 
+
     useEffect(() => {
         let DIV = document.getElementById('avatarArea');
         if (DIV) {
@@ -21,17 +21,19 @@ function Profile(props) {
                 ?
                 getAverageColor(props.profile.photos.large).then(rgb => {
                     console.log(rgb);
-                    DIV.style.background = `rgb(` + rgb.r + `, ` + rgb.g + `, ` + rgb.b + `)`;
+                    setRGB(rgb);
                 })
                 :
                 getAverageColor(IMAGE).then(rgb => {
                     console.log(rgb);
-                    DIV.style.background = `rgb(` + rgb.r + `, ` + rgb.g + `, ` + rgb.b + `)`;
+                    setRGB(rgb);
                 })
         }
     })
 
     let [visible, setVisible] = useState(false);
+
+    let [RGB, setRGB] = useState({r: 255, g: 255, b: 255});
 
     const closeModal = () => {
         setVisible(false);
@@ -46,14 +48,6 @@ function Profile(props) {
         return <Preloader style={style}/>
     }
 
-    // let [RGB, setRGB] = useState({r: 255, g: 255, b: 255});
-    // const setColor = (rgb) => {
-    //     setRGB({rgb});
-    //     console.log(rgb);
-    // }
-    // let imag = 'http://pluspng.com/img-png/user-png-icon-young-user-icon-2400.png'
-
-
     let postItem = props.posts.map(post => <Post key={post.postId} post={post.post}/>);
 
     console.log(props.profile)
@@ -64,7 +58,6 @@ function Profile(props) {
     return (
 
         <div className={style.Profile}>
-            <div id="123">123</div>
             <div className={style.profileArea}>
 
                 {/*<div className={style.avatar}>*/}
@@ -80,8 +73,6 @@ function Profile(props) {
                 {/*    <div><h1>{props.profile.fullName}</h1></div>*/}
 
                 {/*</div>*/}
-
-                {/* finding a dominant color */}
 
                 {
                     props.isFetching
@@ -102,7 +93,8 @@ function Profile(props) {
                             <div id='avatarArea' style={{
                                 height: `35vh`,
                                 position: `relative`,
-                                filter: `blur(10px)`
+                                filter: `blur(10px)`,
+                                background: `rgb(` + RGB.r + `, ` + RGB.g + `, ` + RGB.b + `)`
                             }}>
                             </div>
                             <div className={style.avatar}>
@@ -134,6 +126,7 @@ function Profile(props) {
                                 avatarStyle={modalAvatarStyle}
                                 visible={visible}
                                 setVisible={setVisible}
+                                RGB={RGB}
                             />
 
                         </div>
