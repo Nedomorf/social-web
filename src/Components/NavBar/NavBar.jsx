@@ -31,12 +31,14 @@ function NavBar(props) {
                         </div>
                     </div>
                     :
-                    <div className={style.navs} style={{ gridTemplateColumns: `3fr 1fr` }}>
+                    <div className={style.navs} style={{gridTemplateColumns: `3fr 1fr`}}>
                         <div className={style.navItem}></div>
                         <div className={style.navItem}>
                             <div className={`${style.userStateWrapper} ${style.login}`}>
                                 <div className={style.userState}>
-                                    <div>Login</div>
+                                    <NavLink to='/login'>
+                                        <div>Login</div>
+                                    </NavLink>
                                     <div className={style.userDataImage}>
                                         <img src="http://pluspng.com/img-png/user-png-icon-young-user-icon-2400.png"
                                              alt="profile-image"/>

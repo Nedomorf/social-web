@@ -17,17 +17,15 @@ function Profile(props) {
     useEffect(() => {
         let DIV = document.getElementById('avatarArea');
         // setInitial(true);
-        if (DIV && initial) {
+        if (DIV) {
             props.profile.photos.large
                 ?
                 getAverageColor(props.profile.photos.large).then(rgb => {
-                    console.log(rgb);
                     setRGB(rgb);
                     setInitial(false);
                 })
                 :
                 getAverageColor(IMAGE).then(rgb => {
-                    console.log(rgb);
                     setRGB(rgb);
                     setInitial(false);
                 })
@@ -54,8 +52,6 @@ function Profile(props) {
     }
 
     let postItem = props.posts.map(post => <Post key={post.postId} post={post.post}/>);
-
-    console.log(props.profile)
 
     let avatarStyle = {width: `200px`, height: `200px`, margin: `30px`};
     let modalAvatarStyle = {width: `500px`, height: `500px`, margin: `30px`};
