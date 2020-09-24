@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import style from './Profile.module.css';
 import Post from "./Post/Post";
 import Preloader from "../Common/Preloader";
@@ -10,33 +10,21 @@ import ProfileAvatar from "./ProfileAvatar";
 import Popup from "../Common/Popup";
 
 import getAverageColor from 'get-average-color';
+import ProfileAvatarDominantColor from "./ProfileAvatarDminantColor";
 
 function Profile(props) {
 
+    let [visible, setVisible] = useState(false);
+    let [RGB, setRGB] = useState({r: 0, g: 0, b: 0});
 
     useEffect(() => {
-        let DIV = document.getElementById('avatarArea');
-        // setInitial(true);
-        if (DIV) {
-            props.profile.photos.large
-                ?
-                getAverageColor(props.profile.photos.large).then(rgb => {
-                    setRGB(rgb);
-                    setInitial(false);
-                })
-                :
-                getAverageColor(IMAGE).then(rgb => {
-                    setRGB(rgb);
-                    setInitial(false);
-                })
+        let profile = props.profile;
+        if (profile) {
+            ProfileAvatarDominantColor(setRGB, profile)
         }
-    })
+    }, [props.profile])
 
-    let [visible, setVisible] = useState(false);
-
-    let [RGB, setRGB] = useState({r: 0, g: 0, b:0});
-
-    let [initial, setInitial] = useState(true);
+    console.log('123')
 
     const closeModal = () => {
         setVisible(false);
@@ -59,6 +47,7 @@ function Profile(props) {
     return (
 
         <div className={style.Profile}>
+            {/*<ProfileAvatarDominantColor profile={props.profile} setRGB={setRGB}/>*/}
             <div className={style.profileArea}>
 
                 {/*<div className={style.avatar}>*/}
