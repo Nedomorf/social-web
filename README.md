@@ -1,5 +1,9 @@
 Deploy at github pages: https://nedomorf.github.io/social-web/
-
+<br>
+login: free@samuraijs.com
+<br>
+password: free
+<br>
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
