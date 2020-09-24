@@ -16,24 +16,29 @@ function Profile(props) {
 
     useEffect(() => {
         let DIV = document.getElementById('avatarArea');
-        if (DIV) {
+        // setInitial(true);
+        if (DIV && initial) {
             props.profile.photos.large
                 ?
                 getAverageColor(props.profile.photos.large).then(rgb => {
                     console.log(rgb);
                     setRGB(rgb);
+                    setInitial(false);
                 })
                 :
                 getAverageColor(IMAGE).then(rgb => {
                     console.log(rgb);
                     setRGB(rgb);
+                    setInitial(false);
                 })
         }
     })
 
     let [visible, setVisible] = useState(false);
 
-    let [RGB, setRGB] = useState({r: 255, g: 255, b: 255});
+    let [RGB, setRGB] = useState({r: 0, g: 0, b:0});
+
+    let [initial, setInitial] = useState(true);
 
     const closeModal = () => {
         setVisible(false);
