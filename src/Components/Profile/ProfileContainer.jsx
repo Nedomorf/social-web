@@ -1,31 +1,52 @@
 import Profile from "./Profile";
 import {addPost, getProfile, updateUserAvatar, updateUserStatus} from "../../Redux/profile-reducer";
 import {connect} from "react-redux";
-import React from "react";
+import React, {useEffect} from "react";
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 
-class ProfileContainer extends React.Component {
+const ProfileContainer = (props) => {
 
-    componentDidMount() {
+    let refreshProfile = function () {
+        // let userId = this.props.match.params.userId;
+        // if (!userId) userId = this.props.myId;
+        // this.props.getProfile(userId);
+        let userId = props.match.params.userId;
+        if (!userId) userId = props.myId;
+        props.getProfile(userId);
+    }
 
-        let userId = this.props.match.params.userId;
+    useEffect(() => {
+        refreshProfile()
+    }, [props.match.params.userId])
 
-        if (!userId) userId = this.props.myId
+    // componentDidMount() {
+    //     this.refreshProfile()
+    // };
+    //
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     // if (this.props.profile && prevProps.profile) {
+    //     if (this.props.match.params.userId !== prevProps.match.params.userId) {
+    //         debugger
+    //         this.refreshProfile()
+    //     }
+    //     if (this.props.profile && prevProps.profile) {
+    //         debugger
+    //         if (this.props.profile.photos.large !== prevProps.profile.photos.large) {
+    //             this.refreshProfile();
+    //         }
+    //     }
+    //     // }
+    // }
 
-        this.props.getProfile(userId);
-
-    };
-
-    render() {
         return (
 
-            <Profile {...this.props}/>
+            <Profile {...props}/>
 
         )
-    }
+
 
 }
 

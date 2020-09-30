@@ -60,7 +60,13 @@ export const userProfileAPI = {
     },
 
     uploadUserAvatar(avatar) {
-        return instance.put('/profile/photo', {avatar})
+        const formData = new FormData();
+        formData.append('image', avatar);
+        return instance.put('/profile/photo', formData, {
+            headers: {
+                'Content-type': 'multipart/form-data'
+            }
+        })
             .then(res => {
                 return res
             })

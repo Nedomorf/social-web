@@ -94,6 +94,9 @@ function Profile(props) {
                                 setVisible={setVisible}
                                 RGB={RGB}
                                 updateUserAvatar={props.updateUserAvatar}
+                                myId={props.myId}
+                                userId={props.profile.userId}
+                                refreshProfile={props.getProfile}
                             />
 
                         </div>

@@ -12,9 +12,11 @@ const Popup = (props) => {
     }
 
     const onPhotoSelected = (e) => {
-        return (
-            props.updateUserAvatar
-        )
+        if (e.target.files.length) {
+            props.updateUserAvatar(e.target.files[0]);
+            props.refreshProfile(props.userId);
+            props.setVisible(false);
+        }
     }
 
     return (
@@ -23,7 +25,11 @@ const Popup = (props) => {
             <div className={style.popupInner}
                  style={{background: `rgb(` + props.RGB.r + `, ` + props.RGB.g + `, ` + props.RGB.b + `)`}}>
                 {/*<UploadProfilePhoto/>*/}
-                <input type="file" onChange={onPhotoSelected}/>
+                {
+                    (props.myId === props.userId)
+                        ? <input type="file" onChange={onPhotoSelected}/>
+                        : null
+                }
                 <ProfileAvatar
                     profilePhoto={props.profilePhoto}
                     avatarStyle={modalAvatarStyle}

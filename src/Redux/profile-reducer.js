@@ -20,7 +20,6 @@ let initialState = {
     ],
     profile: null,
     status: 'Изменить статус...',
-    avatar: 'http://pluspng.com/img-png/user-png-icon-young-user-icon-2400.png',
     isFetching: false
 };
 
@@ -50,7 +49,7 @@ let profileReducer = (state = initialState, action) => {
         case SET_AVATAR:
             return  {
                 ...state,
-                avatar: action.avatar
+                profile: {...state.profile, photos: action.avatar}
             }
         case TOGGLE_IS_FETCHING:
             return {
@@ -96,7 +95,6 @@ export const getProfile = (userId) => {
         userProfileAPI.getUserProfile(userId)
             .then(data => {
                 dispatch(setProfile(data));
-                debugger
                 // this.props.setTotalCount(res.data.totalCount);
                 dispatch(toggleIsFetching(false))
             })
@@ -127,8 +125,9 @@ export const updateUserAvatar = (avatar) => {
     return (dispatch) => {
         userProfileAPI.uploadUserAvatar(avatar)
             .then(data => {
+                debugger
                 if (data.resultCode === 0) {
-                    dispatch(setAvatar(data))
+                    dispatch(setAvatar(data.data.photos))
                 }
             })
     }
