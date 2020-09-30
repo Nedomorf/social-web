@@ -4,6 +4,7 @@ const ADD_POST = 'ADD-POST';
 const SET_PROFILE = 'SET-PROFILE';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 const SET_STATUS = 'SET-STATUS';
+const SET_AVATAR = 'SET-AVATAR';
 
 let id = 0;
 
@@ -19,6 +20,7 @@ let initialState = {
     ],
     profile: null,
     status: 'Изменить статус...',
+    avatar: 'http://pluspng.com/img-png/user-png-icon-young-user-icon-2400.png',
     isFetching: false
 };
 
@@ -39,17 +41,22 @@ let profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 profile: action.profile
-            }
+            };
         case SET_STATUS:
             return {
                 ...state,
                 status: action.status
+            };
+        case SET_AVATAR:
+            return  {
+                ...state,
+                avatar: action.avatar
             }
         case TOGGLE_IS_FETCHING:
             return {
                 ...state,
                 isFetching: action.isFetching
-            }
+            };
         default:
             return state;
 
@@ -72,6 +79,11 @@ export const setStatus = (status) => ({
     status
 })
 
+export const setAvatar = (avatar) => ({
+    type: SET_AVATAR,
+    avatar
+})
+
 export const toggleIsFetching = (isFetching) => ({
     type: TOGGLE_IS_FETCHING,
     isFetching
@@ -84,6 +96,7 @@ export const getProfile = (userId) => {
         userProfileAPI.getUserProfile(userId)
             .then(data => {
                 dispatch(setProfile(data));
+                debugger
                 // this.props.setTotalCount(res.data.totalCount);
                 dispatch(toggleIsFetching(false))
             })
@@ -106,6 +119,17 @@ export const updateUserStatus = (status) => {
                 }
                 // this.props.setTotalCount(res.data.totalCount);
                 dispatch(toggleIsFetching(false))
+            })
+    }
+}
+
+export const updateUserAvatar = (avatar) => {
+    return (dispatch) => {
+        userProfileAPI.uploadUserAvatar(avatar)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setAvatar(data))
+                }
             })
     }
 }

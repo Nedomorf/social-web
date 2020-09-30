@@ -1,5 +1,5 @@
 import getAverageColor from "get-average-color";
-import IMAGE from "../../images/git-profile.jpg";
+import IMAGE from "../../../images/git-profile.jpg";
 
 const ProfileAvatarDominantColor = (setRGB, profile) => {
 

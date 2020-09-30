@@ -1,16 +1,13 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import style from './Profile.module.css';
 import Post from "./Post/Post";
 import Preloader from "../Common/Preloader";
-
-import IMAGE from '../../images/git-profile.jpg'
 import ProfileStatus from "./ProfileStatus";
 import AddPostForm from "./AddPostForm";
-import ProfileAvatar from "./ProfileAvatar";
+import ProfileAvatar from "./ProfileAvatar/ProfileAvatar";
 import Popup from "../Common/Popup";
-
-import getAverageColor from 'get-average-color';
-import ProfileAvatarDominantColor from "./ProfileAvatarDminantColor";
+import ProfileAvatarDominantColor from "./ProfileAvatar/ProfileAvatarDminantColor";
+import {updateUserAvatar} from "../../Redux/profile-reducer";
 
 function Profile(props) {
 
@@ -47,22 +44,7 @@ function Profile(props) {
     return (
 
         <div className={style.Profile}>
-            {/*<ProfileAvatarDominantColor profile={props.profile} setRGB={setRGB}/>*/}
             <div className={style.profileArea}>
-
-                {/*<div className={style.avatar}>*/}
-
-                {/*    {*/}
-                {/*        props.profile.photos.large === null*/}
-                {/*            ? <img src="https://zurlz.xyz/img/userb.png" alt="profile-ava" className={style.avatarImg}/>*/}
-                {/*            : <img src={props.profile.photos.large} alt="profile-ava" className={style.avatarImg}/>*/}
-                {/*        // ? IMG = `https://zurlz.xyz/img/userb.png`*/}
-                {/*        // : IMG = props.profile.photos.large*/}
-                {/*    }*/}
-
-                {/*    <div><h1>{props.profile.fullName}</h1></div>*/}
-
-                {/*</div>*/}
 
                 {
                     props.isFetching
@@ -88,7 +70,7 @@ function Profile(props) {
                             }}>
                             </div>
                             <div className={style.avatar}>
-                                <div onClick={openModal}>
+                                <div onClick={openModal} className={style.ava}>
                                     <ProfileAvatar
                                         profilePhoto={props.profile.photos.large}
                                         avatarStyle={avatarStyle}/>
@@ -97,19 +79,13 @@ function Profile(props) {
                             </div>
                             <div className={style.description}>
                                 {/*<h3>{props.profile.aboutMe}</h3>*/}
-                                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+                                <ProfileStatus
+                                    status={props.status}
+                                    updateUserStatus={props.updateUserStatus}
+                                    myId={props.myId}
+                                    userId={props.profile.userId}
+                                />
                             </div>
-
-                            {/*<Modal visible={visible} width="1000px" height="600px" effect="fadeInDown"*/}
-                            {/*       onClickAway={closeModal}>*/}
-                            {/*    <div>*/}
-                            {/*        <ProfileAvatar*/}
-                            {/*            profilePhoto={props.profile.photos.large}*/}
-                            {/*            color={color}*/}
-                            {/*            avatarStyle={modalAvatarStyle}*/}
-                            {/*        />*/}
-                            {/*    </div>*/}
-                            {/*</Modal>*/}
 
                             <Popup
                                 profilePhoto={props.profile.photos.large}
@@ -117,23 +93,24 @@ function Profile(props) {
                                 visible={visible}
                                 setVisible={setVisible}
                                 RGB={RGB}
+                                updateUserAvatar={props.updateUserAvatar}
                             />
 
                         </div>
 
 
                 }
-
-                <div className={style.posts} style={{marginTop: `-35vh`}}>
-                    <AddPostForm {...props}/>
-                    {/*<div className={style.addPost}>*/}
-                    {/*    <textarea onChange={props.changePostText} value={props.newPostText}/>*/}
-                    {/*    <button onClick={props.addPost}>Отправить</button>*/}
-                    {/*</div>*/}
-                    <div className={style.postsArea}>
-                        {postItem.reverse()}
-                    </div>
-                </div>
+                {
+                    (props.myId === props.profile.userId)
+                        ?
+                        <div className={style.posts} style={{marginTop: `-35vh`}}>
+                            <AddPostForm {...props}/>
+                            <div className={style.postsArea}>
+                                {postItem.reverse()}
+                            </div>
+                        </div>
+                        : null
+                }
 
             </div>
 

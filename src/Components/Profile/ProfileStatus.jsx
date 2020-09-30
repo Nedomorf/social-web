@@ -18,9 +18,9 @@ const ProfileStatus = (props) => {
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status);
 
-    useEffect( () => {
+    useEffect(() => {
         setStatus(props.status)
-    }, [props.status] )
+    }, [props.status])
 
 
     const enableEditMode = () => {
@@ -40,11 +40,19 @@ const ProfileStatus = (props) => {
         <>
             {
                 !editMode
-                    ? <div onClick={enableEditMode}>
-                        <h3>
-                            {status}
-                        </h3>
-                    </div>
+                    ? (props.myId === props.userId)
+                        ?
+                        <div onClick={enableEditMode}>
+                            <h3>
+                                {status}
+                            </h3>
+                        </div>
+                        :
+                        <div>
+                            <h3>
+                                {status}
+                            </h3>
+                        </div>
 
                     : <div onBlur={disableEditMode}>
                         <input type="text" value={status} onChange={onStatusChange} autoFocus={true}/>

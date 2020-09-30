@@ -4,6 +4,7 @@ const ProfileAvatar = (props) => {
     let avatarStyle = props.avatarStyle;
     return (
         <div>
+
             {
                 props.profilePhoto === null
                     ?

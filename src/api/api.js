@@ -57,6 +57,13 @@ export const userProfileAPI = {
             .then(res => {
                 return res
             })
+    },
+
+    uploadUserAvatar(avatar) {
+        return instance.put('/profile/photo', {avatar})
+            .then(res => {
+                return res
+            })
     }
 }
 

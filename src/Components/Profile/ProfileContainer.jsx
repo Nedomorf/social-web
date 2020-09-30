@@ -1,5 +1,5 @@
 import Profile from "./Profile";
-import {addPost, getProfile, updateUserStatus} from "../../Redux/profile-reducer";
+import {addPost, getProfile, updateUserAvatar, updateUserStatus} from "../../Redux/profile-reducer";
 import {connect} from "react-redux";
 import React from "react";
 import {withRouter} from "react-router-dom";
@@ -39,7 +39,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = {addPost, getProfile, updateUserStatus}
+let mapDispatchToProps = {addPost, getProfile, updateUserStatus, updateUserAvatar}
 
 export default compose(
     withAuthRedirect,
