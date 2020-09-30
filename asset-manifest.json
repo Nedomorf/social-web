@@ -1,25 +1,29 @@
 {
   "files": {
-    "main.css": "/social-web/static/css/main.3d4a3ad3.chunk.css",
-    "main.js": "/social-web/static/js/main.18f23a03.chunk.js",
-    "main.js.map": "/social-web/static/js/main.18f23a03.chunk.js.map",
+    "main.css": "/social-web/static/css/main.7ad773d1.chunk.css",
+    "main.js": "/social-web/static/js/main.d341895b.chunk.js",
+    "main.js.map": "/social-web/static/js/main.d341895b.chunk.js.map",
     "runtime-main.js": "/social-web/static/js/runtime-main.81c02c6a.js",
     "runtime-main.js.map": "/social-web/static/js/runtime-main.81c02c6a.js.map",
-    "static/js/2.f0797df3.chunk.js": "/social-web/static/js/2.f0797df3.chunk.js",
-    "static/js/2.f0797df3.chunk.js.map": "/social-web/static/js/2.f0797df3.chunk.js.map",
+    "static/css/2.2ce93ba3.chunk.css": "/social-web/static/css/2.2ce93ba3.chunk.css",
+    "static/js/2.37cba7ab.chunk.js": "/social-web/static/js/2.37cba7ab.chunk.js",
+    "static/js/2.37cba7ab.chunk.js.map": "/social-web/static/js/2.37cba7ab.chunk.js.map",
     "index.html": "/social-web/index.html",
-    "precache-manifest.c08c6c97556847e7c983979a003bcbae.js": "/social-web/precache-manifest.c08c6c97556847e7c983979a003bcbae.js",
+    "precache-manifest.974cc208ccb8055f691db07affc4115a.js": "/social-web/precache-manifest.974cc208ccb8055f691db07affc4115a.js",
     "service-worker.js": "/social-web/service-worker.js",
-    "static/css/main.3d4a3ad3.chunk.css.map": "/social-web/static/css/main.3d4a3ad3.chunk.css.map",
-    "static/js/2.f0797df3.chunk.js.LICENSE.txt": "/social-web/static/js/2.f0797df3.chunk.js.LICENSE.txt",
+    "static/css/2.2ce93ba3.chunk.css.map": "/social-web/static/css/2.2ce93ba3.chunk.css.map",
+    "static/css/main.7ad773d1.chunk.css.map": "/social-web/static/css/main.7ad773d1.chunk.css.map",
+    "static/js/2.37cba7ab.chunk.js.LICENSE.txt": "/social-web/static/js/2.37cba7ab.chunk.js.LICENSE.txt",
     "static/media/App.css": "/social-web/static/media/Ann.9253235b.jpg",
+    "static/media/UploadIcon.svg": "/social-web/static/media/UploadIcon.1cedb6e9.svg",
     "static/media/git-profile.jpg": "/social-web/static/media/git-profile.15f33404.jpg",
     "static/media/preloader.svg": "/social-web/static/media/preloader.f066f360.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.81c02c6a.js",
-    "static/js/2.f0797df3.chunk.js",
-    "static/css/main.3d4a3ad3.chunk.css",
-    "static/js/main.18f23a03.chunk.js"
+    "static/css/2.2ce93ba3.chunk.css",
+    "static/js/2.37cba7ab.chunk.js",
+    "static/css/main.7ad773d1.chunk.css",
+    "static/js/main.d341895b.chunk.js"
   ]
 }
